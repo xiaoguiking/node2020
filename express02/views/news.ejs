@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>news</title>
+  </head>
+  <body>
+    <h2>模板引擎ejs</h2>
+    <p><%=newInfo.username%></p>
+    <p><%=newInfo.age%></p>
+    <p>渲染html<%=article%></p>
+    <p>解析html渲染：<%-article%></p>
+    <h2>条件判断</h2>
+    <%if(flag === true){%>
+    <strong>flag === true</strong>
+    <%}%> <%if(score >= 60){%>
+    <strong>及格</strong>
+    <%}else{%> 不及格<%}%>
+    <h2>for遍历</h2>
+    <ul>
+      <%for(var i = 0; i< arr.length; i++) {%>
+      <li><%=arr[i]%></li>
+      <%}%>
+    </ul>
+    <%-include('footer.ejs')%>
+  </body>
+</html>
