@@ -22,13 +22,38 @@ const express = require("express");
 
 const ejs = require("ejs");
 const app = express();
+// post 获取中间件
+const bodyParser = require('body-parser');
+
+const session = require('express-session')
+
+// 配置session
+app.use(session({
+  secret: 'keyboard cat', // 服务端生成session 签名
+  resave: false,        // 强制保存 即使它没有变化
+  saveUninitialized: true,  //  强制将为未初始化的session存储
+  cookie: {
+    maxAge: 1000 * 6, // 过期时间
+    secure: false,    // true 表示只有https协议才能访问
+  },
+  rolling: true, // 在每次请求强行设置cookie，重置cookie的过期时间
+}))
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+// 应用级中间件 用于权限判断
+app.use((req, res, next) => {
+  console.log(new Date())
+  next()
+})
 
 app.engine("html", ejs.__express);
 app.set("view engine", "html");
 
-app.get("/", (req, res) => {
-  res.send("hello express02");
-});
+
 
 // 模板引擎配置
 // app.set("view engine", "ejs");
@@ -51,8 +76,35 @@ app.get("/html", (req, res) => {
   });
 });
 
-// 配置静态资源文件
+// 配置静态资源文件 ------------> 内置中间件
 app.use(express.static("static"));
+
+
+
+app.get("/", (req, res) => {
+  if (req.session.username) {
+    res.send(req.session.username + "已经登录")
+  } else {
+    res.send("未登录")
+  }
+});
+
+
+// 登录接口
+app.get("/login", (req, res) => {
+  req.session.username = "张三"
+  res.render('login', {
+
+  })
+})
+
+// post 接口
+app.post("/doLogin", (req, res) => {
+  const body = req.body;
+  console.log("body", body)
+  res.send("执行提交" + '用户名:' + body.username + '密码' + body.pwd)
+})
+
 
 app.get("/news", (req, res) => {
   let newInfo = {
@@ -70,6 +122,11 @@ app.get("/news", (req, res) => {
     arr: arr,
   });
 });
+
+// 错误处理中间件
+// app.use((req, res, next) => {
+//   res.status(404).send("404")
+// })
 
 app.listen(3002, () => {
   console.log("express02 port is 3002");
