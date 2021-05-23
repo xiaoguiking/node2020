@@ -39,6 +39,7 @@ app.use(session({
   rolling: true, // 在每次请求强行设置cookie，重置cookie的过期时间
 }))
 
+app.use(express.urlencoded())
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -82,10 +83,14 @@ app.use(express.static("static"));
 
 
 app.get("/", (req, res) => {
+  let options = {
+    title: "文章首页",
+    articleTitle: "文章标题"
+  }
   if (req.session.username) {
     res.send(req.session.username + "已经登录")
   } else {
-    res.send("未登录")
+    res.send("未登录", options)
   }
 });
 
@@ -94,8 +99,32 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
   req.session.username = "张三"
   res.render('login', {
+  })
+})
+
+/**
+ * search   get/post 请求 
+ */
+
+// post接口 search
+app.get('/search', (req, res) => {
+  console.log(req.url)
+  // 提取url 后面的字符串
+  let queryStr = req.url.split("?")[1];
+  console.log(queryStr)
+  // 表单提交的键值进行分割
+  let keyValueArr = queryStr.split("&");
+  console.log(keyValueArr, "arr")
+  // 设置query对象，对键值进行保存
+  let query = {};
+  keyValueArr.forEach(item => {
+    let key = item.split("=")[0];
+    let value = item.split("=")[1];
+    query[key] = value
 
   })
+  console.log(query, "===========>query", query.username)
+  res.send("get请求search")
 })
 
 // post 接口
@@ -104,6 +133,25 @@ app.post("/doLogin", (req, res) => {
   console.log("body", body)
   res.send("执行提交" + '用户名:' + body.username + '密码' + body.pwd)
 })
+
+
+// 
+app.get("/index", (req, res) => {
+  console.log("执行首页")
+  res.render('index', {
+  })
+})
+
+app.get("/search_index", (req, res) => {
+  let query = req.query;
+  console.log(query, "=============> query")
+})
+
+app.post("/search_index", (req, res) => {
+  let query = req.body;
+  console.log(query, "=============> query")
+})
+
 
 
 app.get("/news", (req, res) => {
