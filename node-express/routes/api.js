@@ -5,6 +5,15 @@ var express = require('express');
 var api = express.Router();
 
 
+api.use((req, res, next) => {
+    //允许的请求类型
+    // 'Access-Control-Allow-Methods:GET,POST,PUT,POST'
+    //允许的请求头字段
+    // 'Access-Control-Allow-Headers:x-requested-with,content-type'
+    res.append('Access-Control-Allow-Origin', "*");
+    res.append('Access-Control-Allow-Content-Type', "*");
+    next()
+})
 
 /* GET home page. */
 api.get('/book/list', function (req, res, next) {
