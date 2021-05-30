@@ -4,12 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const ejs = require("ejs");
+const bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var regRouter = require('./routes/reg');
+
 var api = require("./routes/api")
+var food = require("./routes/food")
 
 const { nextTick } = require('process');
 
@@ -21,7 +24,10 @@ var app = express();
 app.engine("html", ejs.__express);
 app.set("view engine", "html");
 
+app.use(bodyParser.urlencoded({ extended: false }))
 
+// parse application/json
+app.use(bodyParser.json())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,7 +37,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
   console.log("访问如何页面，此函数都会被调用")
-  next()
+  let { token } = req.query;
+  console.log(token, "==========>token")
+  if (token) {
+    next()
+  } else {
+    res.send("缺少token")
+  }
+  // next()
 })
 
 // 路由中间件
@@ -41,6 +54,7 @@ app.use('/login', loginRouter)
 app.use('/reg', regRouter)
 // api
 app.use('/api', api)
+app.use("/food", food)
 
 
 // catch 404 and forward to error handler

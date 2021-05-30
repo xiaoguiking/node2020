@@ -1,5 +1,7 @@
 /**
  * 提供api 接口
+ *  get  req.query
+ *  post  第三方插件 body-parser 数据格式： json  x-www-form  formdata
  */
 var express = require('express');
 var api = express.Router();
@@ -15,8 +17,48 @@ api.use((req, res, next) => {
     next()
 })
 
+// 登录接口  http://localhost:3000/api/user/login?username=amdin&pwd=123
+
+api.get("/user/login", (req, res) => {
+    console.log("ok", req.query)
+    const { username, pwd } = req.query;
+
+    if (username === "admin" && pwd === "123") {
+        res.json({
+            err: 0,
+            msg: "login ok",
+
+        })
+    } else {
+        res.json({
+            err: -1,
+            msg: "登录失败, 确认用户名或者密码"
+        })
+    }
+
+})
+
+
+// 注册接口 reg
+// 接受post 数据 消息体/请求体req.body
+api.post("/user/reg", (req, res) => {
+    console.log(req.body, "===========>")
+    let { username, pwd, } = req.body;
+    if (username === "admin" && pwd === "123") {
+        res.json({
+            err: 0,
+            msg: "注册成功",
+        })
+    } else {
+        res.json({
+            err: -1,
+            msg: "注册失败"
+        })
+    }
+})
+
 /* GET home page. */
-api.get('/book/list', function (req, res, next) {
+api.get('/user/book/list', function (req, res, next) {
     let options = {
         title: "三国演义",
         type: "古代历史",
@@ -56,7 +98,6 @@ api.get('/book/list', function (req, res, next) {
     // console.log(result)
 
     // let result = { ...options, ...options1, ...options2 };
-    // console.log(result)
     res.json({
         data: {
             status: "true",
