@@ -14,9 +14,19 @@ var regRouter = require('./routes/reg');
 var api = require("./routes/api")
 var food = require("./routes/food")
 
+
+
 const { nextTick } = require('process');
 
 var app = express();
+
+
+// mongo 操作
+require('./api/model/db');
+const login = require('./api/routes/public/login');
+const reg = require('./api/routes/public/reg');
+
+
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -37,24 +47,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
   console.log("访问如何页面，此函数都会被调用")
-  let { token } = req.query;
-  console.log(token, "==========>token")
-  if (token) {
-    next()
-  } else {
-    res.send("缺少token")
-  }
-  // next()
+  // let { token } = req.query;
+  // console.log(token, "==========>token")
+  // if (token) {
+  //   next()
+  // } else {
+  //   res.send("缺少token")
+  // }
+  next()
 })
 
 // 路由中间件
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/login', loginRouter)
-app.use('/reg', regRouter)
-// api
-app.use('/api', api)
-app.use("/food", food)
+
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+// app.use('/login', loginRouter)
+// app.use('/reg', regRouter)
+// // api
+// app.use('/api', api)
+// app.use("/food", food)
+
+app.use('/api',login)
+app.use('/api', reg)
 
 
 // catch 404 and forward to error handler
