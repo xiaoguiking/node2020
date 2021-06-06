@@ -4,15 +4,28 @@ const common = require("../common");
 const {User} = require("../../model/index")
 
 module.exports.login = function (req, res) {
-  const userName = req.query.userName;
-  
-  User.find({ "userName":userName},function(err,data) {
+  const {userName, password} = req.query;
+  console.log(userName, password)
+  User.find({ userName, password},function(err,data) {
       if (err) {
           common.sendJsonResponse(res, 500, err);
           return;
       }
-      console.log(data, "==============>data")
-      common.sendResponse(res, 200, data);
+      if (userName && password) {
+        let data = {
+          err: 0,
+          msg: "登录成功"
+        }
+        common.sendResponse(res, 200,data)
+      } else {
+        let data = {
+          err: -1,
+          msg: "参数问题"
+        }
+        common.sendResponse(res, 200,data)
+      }
+      // console.log(data, "==============>data")
+      // common.sendResponse(res, 200, data);
   })
 
 };

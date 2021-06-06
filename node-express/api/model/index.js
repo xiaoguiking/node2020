@@ -17,6 +17,10 @@ var loginSchema = new Schema({
         type: Date,
         'default': Date.now
     },
+    title: {
+        type: String,
+        require: true,
+    },
     updateBy: String,
     updateTime: Date
 });

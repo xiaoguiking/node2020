@@ -67,7 +67,9 @@ app.use(function (req, res, next) {
 // app.use('/api', api)
 // app.use("/food", food)
 
-app.use('/api',login)
+// localhost:3000/api/login?username=admin
+
+app.use('/api', login)
 app.use('/api', reg)
 
 

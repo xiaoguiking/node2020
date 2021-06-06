@@ -18,6 +18,7 @@ mongoose.connect(dbURL,  {useUnifiedTopology:true, useNewUrlParser: true},   );
  
 mongoose.connection.on('connected',function() {
     console.log('Mongoose connected to ' + dbURL);
+    console.log("db start")
 });
  
 mongoose.connection.on('error',function(err) {
@@ -53,4 +54,4 @@ process.on('SIGTERM',function() {
     });
 });
  
-require('./admin/login');
+// require('./admin/login');
