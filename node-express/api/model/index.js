@@ -54,19 +54,15 @@ var foodSchema = new Schema({
         type: String,
         required: true,
     },
-    sex: {
-        type: Number,
-        default: 0
-    }
 })
  
 // model 参数和 mongodb数据库中的collections相关联，注意数据库中命名需要加入s -------- users 
 const User = model('User', loginSchema)
-const Food = model('Food', foodSchema)
+const FoodModel = model('foods', foodSchema)
 
 // module.exports = mongoose.model('user',loginSchema,'login');
 
 module.exports = {
     User,
-    Food
+    FoodModel
 }

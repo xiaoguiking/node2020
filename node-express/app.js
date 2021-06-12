@@ -25,6 +25,7 @@ var app = express();
 require('./api/model/db');
 const login = require('./api/routes/public/login');
 const reg = require('./api/routes/public/reg');
+const addfood = require('./api/routes/public/Food/addfood')
 
 
 
@@ -71,6 +72,7 @@ app.use(function (req, res, next) {
 
 app.use('/api', login)
 app.use('/api', reg)
+app.use('/api/food', addfood)
 
 
 // catch 404 and forward to error handler
