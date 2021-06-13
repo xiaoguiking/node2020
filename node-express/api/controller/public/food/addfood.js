@@ -1,5 +1,7 @@
 /**
- * 接口
+ * 接口  
+ * 添加
+ * api/food/add
  */
 
 const mongoose = require("mongoose");
@@ -16,23 +18,6 @@ module.exports.addfood = function (req, res) {
         typeid,
         img
     } = req.body;
-
-    // console.log(
-    //     name,
-    //     price,
-    //     desc,
-    //     typename,
-    //     typeid,
-    //     img)
-
-    // let data = {
-    //     name: "11",
-    //     price: "111",
-    //     desc: "111",
-    //     typename: "111",
-    //     typeid: "11",
-    //     img: "111"
-    // };
     let data = {
         name,
         price,
@@ -55,7 +40,10 @@ module.exports.addfood = function (req, res) {
         if (err) {
             common.sendJsonResponse(res, 500, err);
         }
-        common.sendResponse(res, 200,data)
+        common.sendResponse(res, 200, {
+            error: "1",
+            message: "添加成功"
+        })
     })
 }
 

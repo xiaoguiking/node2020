@@ -26,6 +26,9 @@ require('./api/model/db');
 const login = require('./api/routes/public/login');
 const reg = require('./api/routes/public/reg');
 const addfood = require('./api/routes/public/Food/addfood')
+const findfood = require('./api/routes/public/Food/findfood')
+const deletefood = require('./api/routes/public/Food/deletefood')
+const updatefood = require('./api/routes/public/Food/updatefood')
 
 
 
@@ -43,6 +46,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// http://localhost:3000/images/book1.jpg
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -60,7 +64,7 @@ app.use(function (req, res, next) {
 
 // 路由中间件
 
-// app.use('/', indexRouter);
+app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 // app.use('/login', loginRouter)
 // app.use('/reg', regRouter)
@@ -72,7 +76,10 @@ app.use(function (req, res, next) {
 
 app.use('/api', login)
 app.use('/api', reg)
-app.use('/api/food', addfood)
+app.use('/api/food', addfood);
+app.use('/api/food', findfood);
+app.use('/api/food', deletefood);
+app.use('/api/food', updatefood);
 
 
 // catch 404 and forward to error handler
