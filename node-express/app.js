@@ -29,6 +29,8 @@ const addfood = require('./api/routes/public/Food/addfood')
 const findfood = require('./api/routes/public/Food/findfood')
 const deletefood = require('./api/routes/public/Food/deletefood')
 const updatefood = require('./api/routes/public/Food/updatefood')
+const getInfoByPage = require('./api/routes/public/Food/infopage')
+const uploadfile = require("./api/routes/public/file/index")
 
 
 
@@ -80,6 +82,9 @@ app.use('/api/food', addfood);
 app.use('/api/food', findfood);
 app.use('/api/food', deletefood);
 app.use('/api/food', updatefood);
+app.use('/api/food', getInfoByPage);
+
+app.use('/file', uploadfile);
 
 
 // catch 404 and forward to error handler
