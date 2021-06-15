@@ -1,8 +1,16 @@
-const common = require("../common");
+/**
+ * @api {post} api/user/reg  用户注册
+ * @apiGroup Group   user
+ * @apiDescription 用户注册
+ *
+ * @apiParam {String} userName  用户名
+ * @apiParam {String} password  密码
+ */
 
+
+const common = require("../common");
 const { User } = require("../../model/index");
 
-// 注册
 module.exports.reg = function (req, res) {
   const { userName, password, title } = req.body;
   console.log(userName, password, title)

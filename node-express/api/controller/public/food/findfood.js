@@ -1,8 +1,11 @@
 /**
- * 接口  
- * 查询
- * api/food/find
+ * @api {post} api/food/find  查询typeid 类型id获取数据
+ * @apiGroup Group   food
+ * @apiDescription   通过类型查询书籍信息
+ *
+ * @apiParam {String} typeid   类型id
  */
+
 
  const mongoose = require("mongoose");
  const common = require("../../common");

@@ -23,8 +23,10 @@ var app = express();
 
 // mongo 操作
 require('./api/model/db');
-const login = require('./api/routes/public/login');
-const reg = require('./api/routes/public/reg');
+const login = require('./api/routes/public/user/login');
+const reg = require('./api/routes/public/user/reg');
+const put = require("./api/routes/public/user/updateuser")
+
 const addfood = require('./api/routes/public/Food/addfood')
 const findfood = require('./api/routes/public/Food/findfood')
 const deletefood = require('./api/routes/public/Food/deletefood')
@@ -78,6 +80,8 @@ app.use('/', indexRouter);
 
 app.use('/api', login)
 app.use('/api', reg)
+app.use('/api',  put)
+
 app.use('/api/food', addfood);
 app.use('/api/food', findfood);
 app.use('/api/food', deletefood);

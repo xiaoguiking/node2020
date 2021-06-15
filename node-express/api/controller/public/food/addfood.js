@@ -1,7 +1,14 @@
 /**
- * 接口  
- * 添加
- * api/food/add
+ * @api {post} api/food/add  添加
+ * @apiGroup Group   food
+ * @apiDescription 添加书籍信息
+ *
+ * @apiParam {String} name  书籍名
+ * @apiParam {String} price 价格
+ * @apiParam {String} desc 描述
+ * @apiParam {String} typename 书籍类型
+ * @apiParam {String} typeid   类型id
+ * @apiParam {String} img   图片
  */
 
 const mongoose = require("mongoose");

@@ -1,8 +1,11 @@
 /**
- * 接口  
- * 删除
- * api/food/delete
+ * @api {post} api/food/delete  删除指定的数据
+ * @apiGroup Group   food
+ * @apiDescription   删除指定书籍信息
+ *
+ * @apiParam {String} _id   唯一id
  */
+
 
  const mongoose = require("mongoose");
  const common = require("../../common");

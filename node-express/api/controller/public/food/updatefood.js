@@ -4,6 +4,19 @@
  *  api/food/update
  */
 
+/**
+ * @api {post} api/food/update  更新某条数据
+ * @apiGroup Group   food
+ * @apiDescription   分页获取数据
+ *
+ * @apiParam {String} name  书籍名
+ * @apiParam {String} price 价格
+ * @apiParam {String} desc 描述
+ * @apiParam {String} typename 书籍类型
+ * @apiParam {String} typeid   类型id
+ * @apiParam {String} img   图片
+ * @apiParam {String} _id   唯一id
+ */
 const mongoose = require("mongoose");
 const common = require("../../common");
 

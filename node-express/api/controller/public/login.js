@@ -1,3 +1,12 @@
+/**
+ * @api {get} api/user/login  用户登录
+ * @apiGroup Group   user
+ * @apiDescription 用户登录信息
+ *
+ * @apiParam {String} userName  用户名
+ * @apiParam {String} password  密码
+ */
+
 const mongoose = require("mongoose");
 const common = require("../common");
 

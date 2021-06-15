@@ -1,7 +1,10 @@
 /**
- * 接口  
- * 查询
- * api/food/getInfoByPage
+ * @api {post} api/food/getInfoByPage  查询分页获取数据
+ * @apiGroup Group   food
+ * @apiDescription   分页获取数据
+ *
+ * @apiParam {String} page      多少页
+ * @apiParam {String} typeid    每页展示多少条
  */
 
  const mongoose = require("mongoose");
