@@ -6,7 +6,7 @@
 - 分页查询   
 - 删除    api/food/delete
 - 修改    api/food/update
-- 上传图片
+- 上传图片 /file/profile ---- 支持单文件上传/ 文件名事件数戳
 type:
 
 - 玄幻 1

@@ -5,6 +5,7 @@ var path = require("path")
 // var {multer} = require("./multer");
 var multer = require("multer");
 
+// localhost:3000/file/profile
 
 // 根据当前文件目录指定文件夹
 const dir = path.resolve(__dirname, '../../../../public/my-uploads/');
@@ -14,8 +15,17 @@ var storage = multer.diskStorage({
     cb(null, dir)
   },
   filename: function (req, file, cb) {
-    // cb(null, file.fieldname+'-'+Date.now())
-    cb(null, 'aa.jpg')
+    // let fileName = "";
+    // if(file.originalname.indexOf(".")) {
+
+    // }
+    let extname = path.extname(file.originalname);
+    let basename = path.basename(file.originalname, extname);
+    // console.log(extname, basename, "==================>")
+    // cb(null, basename  + extname)
+    cb(null, basename+'-'+Date.now() + extname)
+    // cb(null, Date.now() + extname)
+    // cb(null, 'aa.jpg')
   }
 })
 
