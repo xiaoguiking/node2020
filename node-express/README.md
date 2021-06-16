@@ -14,4 +14,12 @@ type:
 - 字典 3
 - 恋爱 4
 
+
+## apidoc
+
+- api文档生成命令 apidoc -i ./api -o ./src/apidoc 
+- 本地服务器文档启动命令 yarn api
+
+
+
 ## 解决跨域

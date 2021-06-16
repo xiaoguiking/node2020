@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "api": "lite-server"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -18,5 +19,8 @@
     "multer": "^1.4.2",
     "nodemon": "^2.0.7",
     "silly-datetime": "^0.1.2"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
   }
 }

@@ -12,10 +12,6 @@ Commonjs 自定义模块的使用
 https://www.bilibili.com/video/BV11t411k79h?p=29
 
 
-## apidoc
-
- apidoc -i ./api -o apidoc  
-
 
 ## Git 贡献提交规范
 
