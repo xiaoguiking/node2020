@@ -1,6 +1,6 @@
 /**
- * @api {post} api/food/find  查询typeid 类型id获取数据
- * @apiGroup Group   food
+ * @api {post} api/book/find  查询typeid 类型id获取数据
+ * @apiGroup Group   Book
  * @apiDescription   通过类型查询书籍信息
  *
  * @apiParam {String} typeid   类型id
@@ -10,11 +10,11 @@
  const mongoose = require("mongoose");
  const common = require("../../common");
  
- const { FoodModel } = require("../../../model/index")
+ const { BookModel } = require("../../../model/index")
  
- module.exports.getTypeid = function (req, res) {
+ module.exports.findBook = function (req, res) {
      const {typeid } =req.body
-     FoodModel.find({typeid}, function (err, data) {
+     BookModel.find({typeid}, function (err, data) {
          if (err) {
              common.sendJsonResponse(res, 500, err);
          }

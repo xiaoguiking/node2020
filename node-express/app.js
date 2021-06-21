@@ -1,61 +1,69 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const ejs = require("ejs");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var loginRouter = require('./routes/login');
-var regRouter = require('./routes/reg');
-
-var api = require("./routes/api")
-var food = require("./routes/food")
-
-
-
-const { nextTick } = require('process');
-
-var app = express();
-
+const { nextTick } = require("process");
+const app = express();
 
 // mongo 操作
-require('./api/model/db');
-const login = require('./api/routes/public/user/login');
-const reg = require('./api/routes/public/user/reg');
-const put = require("./api/routes/public/user/updateuser")
+require("./api/model/db");
+const login = require("./api/routes/public/user/login");
+const reg = require("./api/routes/public/user/reg");
+const put = require("./api/routes/public/user/updateuser");
 
-const addfood = require('./api/routes/public/Food/addfood')
-const findfood = require('./api/routes/public/Food/findfood')
-const deletefood = require('./api/routes/public/Food/deletefood')
-const updatefood = require('./api/routes/public/Food/updatefood')
-const getInfoByPage = require('./api/routes/public/Food/infopage')
-const uploadfile = require("./api/routes/public/file/index")
+// 路由配置
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const loginRouter = require("./routes/login");
+const regRouter = require("./routes/reg");
+const api = require("./routes/api");
+const food = require("./routes/food");
+
+const todos = require("./api/routes/public/todos/index")
 
 
+// 书籍接口api
+const addBook = require("./api/routes/public/book/addBook");
+const findBook = require("./api/routes/public/book/findBook");
+const deleteBook = require("./api/routes/public/book/deleteBook");
+const updateBook = require("./api/routes/public/book/updateBook");
+const getInfoByPage = require("./api/routes/public/book/infopage");
 
+// todos
+
+
+const uploadFile = require("./api/routes/public/file/index");
+
+console.log("Server running at http://localhost:3000");
+
+// render the error page
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 app.engine("html", ejs.__express);
 app.set("view engine", "html");
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
-app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// 访问静态资源实例
 // http://localhost:3000/images/book1.jpg
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function (req, res, next) {
-  console.log("访问如何页面，此函数都会被调用")
+  console.log(req.url, "============>请求地址")
+  console.log(req.method, "==============请求方法")
+  console.log(req.headers, "==============请求头")
+  console.log("访问如何页面，此函数都会被调用");
   // let { token } = req.query;
   // console.log(token, "==========>token")
   // if (token) {
@@ -63,12 +71,11 @@ app.use(function (req, res, next) {
   // } else {
   //   res.send("缺少token")
   // }
-  next()
-})
+  next();
+});
 
 // 路由中间件
-
-app.use('/', indexRouter);
+app.use("/", indexRouter);
 // app.use('/users', usersRouter);
 // app.use('/login', loginRouter)
 // app.use('/reg', regRouter)
@@ -78,18 +85,18 @@ app.use('/', indexRouter);
 
 // localhost:3000/api/login?username=admin
 
-app.use('/api', login)
-app.use('/api', reg)
-app.use('/api',  put)
+app.use("/api", login);
+app.use("/api", reg);
+app.use("/api", put);
+app.use("/api", todos)
 
-app.use('/api/food', addfood);
-app.use('/api/food', findfood);
-app.use('/api/food', deletefood);
-app.use('/api/food', updatefood);
-app.use('/api/food', getInfoByPage);
+app.use("/api/book", addBook);
+app.use("/api/book", findBook);
+app.use("/api/book", deleteBook);
+app.use("/api/book", updateBook);
+app.use("/api/book", getInfoByPage);
 
-app.use('/file', uploadfile);
-
+app.use("/file", uploadFile);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -100,11 +107,10 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  res.locals.error = req.app.get("env") === "development" ? err : {};
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
 module.exports = app;

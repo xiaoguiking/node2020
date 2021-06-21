@@ -1,6 +1,6 @@
 /**
- * @api {post} api/food/add  添加
- * @apiGroup Group   food
+ * @api {post} api/book/add  添加
+ * @apiGroup Group   Book
  * @apiDescription 添加书籍信息
  *
  * @apiParam {String} name  书籍名
@@ -9,21 +9,23 @@
  * @apiParam {String} typename 书籍类型
  * @apiParam {String} typeid   类型id
  * @apiParam {String} img   图片
+ * @apiParam {String} status   文章状态
  */
 
 const mongoose = require("mongoose");
 const common = require("../../common");
 
-const { FoodModel } = require("../../../model/index")
+const { BookModel } = require("../../../model/index")
 
-module.exports.addfood = function (req, res) {
+module.exports.addBook = function (req, res) {
     const {
         name,
         price,
         desc,
         typename,
         typeid,
-        img
+        img,
+        status
     } = req.body;
     let data = {
         name,
@@ -31,7 +33,8 @@ module.exports.addfood = function (req, res) {
         desc,
         typename,
         typeid,
-        img
+        img,
+        status
     };
     console.log(data, "=========>")
     // FoodModel.insertMany(data)
@@ -43,7 +46,7 @@ module.exports.addfood = function (req, res) {
     //     .catch(() => {
     //         res.send({ error: '-1', message: "添加失败" })
     //     })
-    FoodModel.insertMany(data, function (err, data) {
+    BookModel.insertMany(data, function (err, data) {
         if (err) {
             common.sendJsonResponse(res, 500, err);
         }

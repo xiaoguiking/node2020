@@ -1,9 +1,9 @@
 [
   {
     "type": "post",
-    "url": "api/food/add",
+    "url": "api/book/add",
     "title": "添加",
-    "group": "Group_food",
+    "group": "Group_Book",
     "description": "<p>添加书籍信息</p>",
     "parameter": {
       "fields": {
@@ -49,20 +49,27 @@
             "optional": false,
             "field": "img",
             "description": "<p>图片</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>文章状态</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "api/controller/public/food/addfood.js",
-    "groupTitle": "Group_food",
-    "name": "PostApiFoodAdd"
+    "filename": "api/controller/public/book/addBook.js",
+    "groupTitle": "Group_Book",
+    "name": "PostApiBookAdd"
   },
   {
     "type": "post",
-    "url": "api/food/delete",
+    "url": "api/book/delete",
     "title": "删除指定的数据",
-    "group": "Group_food",
+    "group": "Group_Book",
     "description": "<p>删除指定书籍信息</p>",
     "parameter": {
       "fields": {
@@ -78,15 +85,15 @@
       }
     },
     "version": "0.0.0",
-    "filename": "api/controller/public/food/deletefood.js",
-    "groupTitle": "Group_food",
-    "name": "PostApiFoodDelete"
+    "filename": "api/controller/public/book/deleteBook.js",
+    "groupTitle": "Group_Book",
+    "name": "PostApiBookDelete"
   },
   {
     "type": "post",
-    "url": "api/food/find",
+    "url": "api/book/find",
     "title": "查询typeid 类型id获取数据",
-    "group": "Group_food",
+    "group": "Group_Book",
     "description": "<p>通过类型查询书籍信息</p>",
     "parameter": {
       "fields": {
@@ -102,15 +109,15 @@
       }
     },
     "version": "0.0.0",
-    "filename": "api/controller/public/food/findfood.js",
-    "groupTitle": "Group_food",
-    "name": "PostApiFoodFind"
+    "filename": "api/controller/public/book/findBook.js",
+    "groupTitle": "Group_Book",
+    "name": "PostApiBookFind"
   },
   {
     "type": "post",
-    "url": "api/food/getInfoByPage",
+    "url": "api/book/getInfoByPage",
     "title": "查询分页获取数据",
-    "group": "Group_food",
+    "group": "Group_Book",
     "description": "<p>分页获取数据</p>",
     "parameter": {
       "fields": {
@@ -126,22 +133,22 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "typeid",
+            "field": "pageSize",
             "description": "<p>每页展示多少条</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "api/controller/public/food/infopage.js",
-    "groupTitle": "Group_food",
-    "name": "PostApiFoodGetinfobypage"
+    "filename": "api/controller/public/book/infopage.js",
+    "groupTitle": "Group_Book",
+    "name": "PostApiBookGetinfobypage"
   },
   {
     "type": "post",
-    "url": "api/food/update",
+    "url": "api/book/update",
     "title": "更新某条数据",
-    "group": "Group_food",
+    "group": "Group_Book",
     "description": "<p>分页获取数据</p>",
     "parameter": {
       "fields": {
@@ -192,6 +199,13 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
+            "field": "status",
+            "description": "<p>文章状态</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
             "field": "_id",
             "description": "<p>唯一id</p>"
           }
@@ -199,9 +213,57 @@
       }
     },
     "version": "0.0.0",
-    "filename": "api/controller/public/food/updatefood.js",
-    "groupTitle": "Group_food",
-    "name": "PostApiFoodUpdate"
+    "filename": "api/controller/public/book/updateBook.js",
+    "groupTitle": "Group_Book",
+    "name": "PostApiBookUpdate"
+  },
+  {
+    "type": "post",
+    "url": "file/photos/upload",
+    "title": "多文件上传",
+    "group": "Group_File",
+    "description": "<p>多文件上传</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "photos",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/public/file/index.js",
+    "groupTitle": "Group_File",
+    "name": "PostFilePhotosUpload"
+  },
+  {
+    "type": "post",
+    "url": "file/profile",
+    "title": "单文件上传",
+    "group": "Group_File",
+    "description": "<p>单文件上传</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "avatar",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/public/file/index.js",
+    "groupTitle": "Group_File",
+    "name": "PostFileProfile"
   },
   {
     "type": "get",

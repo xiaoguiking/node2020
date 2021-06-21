@@ -5,8 +5,8 @@
  */
 
 /**
- * @api {post} api/food/update  更新某条数据
- * @apiGroup Group   food
+ * @api {post} api/book/update  更新某条数据
+ * @apiGroup Group   Book
  * @apiDescription   分页获取数据
  *
  * @apiParam {String} name  书籍名
@@ -15,12 +15,13 @@
  * @apiParam {String} typename 书籍类型
  * @apiParam {String} typeid   类型id
  * @apiParam {String} img   图片
+ * @apiParam {String} status   文章状态
  * @apiParam {String} _id   唯一id
  */
 const mongoose = require("mongoose");
 const common = require("../../common");
 
-const { FoodModel } = require("../../../model/index")
+const { BookModel } = require("../../../model/index")
 
 module.exports.update = function (req, res) {
     const {
@@ -32,17 +33,9 @@ module.exports.update = function (req, res) {
         img,
         _id
     } = req.body;
-    // let data = {
-    //     name,
-    //     price,
-    //     desc,
-    //     typename,
-    //     typeid,
-    //     img,
-    // }
-    // console.log(_id, data, "========>")
+
     console.log(_id, "========")
-    FoodModel.updateMany({ _id }, {
+    BookModel.updateMany({ _id }, {
         name,
         price,
         desc,

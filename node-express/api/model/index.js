@@ -29,7 +29,7 @@ var loginSchema = new Schema({
 });
 
 
-var foodSchema = new Schema({
+var bookSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -54,15 +54,22 @@ var foodSchema = new Schema({
         type: String,
         required: true,
     },
+    status: {
+        type: Number,
+        require: true,
+    },
+    time: {
+        type: Date, default: Date.now 
+    }
 })
  
 // model 参数和 mongodb数据库中的collections相关联，注意数据库中命名需要加入s -------- users 
 const User = model('User', loginSchema)
-const FoodModel = model('foods', foodSchema)
+const BookModel = model('books', bookSchema)
 
 // module.exports = mongoose.model('user',loginSchema,'login');
 
 module.exports = {
     User,
-    FoodModel
+    BookModel
 }

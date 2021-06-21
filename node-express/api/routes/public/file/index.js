@@ -31,6 +31,13 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
+/**
+ * @api {post} file/profile  单文件上传
+ * @apiGroup Group   File
+ * @apiDescription   单文件上传
+ *
+ * @apiParam {String} avatar     
+ */
 
 router.post('/profile', upload.single('avatar'), function (req, res, next) {
   // req.file 是 `avatar` 文件的信息
@@ -42,6 +49,15 @@ router.post('/profile', upload.single('avatar'), function (req, res, next) {
     file: req.file.path
   })
 })
+
+/**
+ * @api {post} file/photos/upload  多文件上传
+ * @apiGroup Group   File
+ * @apiDescription   多文件上传
+ *
+ * @apiParam {String} photos      
+ */
+
 
 router.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {
   // req.files 是 `photos` 文件数组的信息
@@ -55,31 +71,5 @@ router.post('/photos/upload', upload.array('photos', 12), function (req, res, ne
 })
 
 
-
-
-
-
-
-// 单文件处理
-// router.post('/upload', multer().single('img'), (req, res, next) => {
-//   var body = req.body;
-//   // console.log(body);
-//   const basename = path.basename(req.file.path)
-//   console.log(basename, "img")
-//   res.send({
-//     body: req.body,
-//     file: req.file
-//   });
-// })
-
-
-// // 多文件处理
-// const cpUpload = multer().fields([{ name: 'img1', maxCount: 1 }, { name: 'img2', maxCount: 8 }]);
-// router.post('/uploads', cpUpload, (req, res) => {
-//   res.send({
-//     body: req.body,
-//     files: req.files
-//   });
-// })
 
 module.exports = router;
