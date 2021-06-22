@@ -42,7 +42,7 @@ api.get("/user/login", (req, res) => {
 // 注册接口 reg
 // 接受post 数据 消息体/请求体req.body
 api.post("/user/reg", (req, res) => {
-    console.log(req.body, "===========>")
+    console.log(req.body, "===========>body")
     let { username, pwd, } = req.body;
     if (username === "admin" && pwd === "123") {
         res.json({

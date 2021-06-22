@@ -60,9 +60,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function (req, res, next) {
-  console.log(req.url, "============>请求地址")
-  console.log(req.method, "==============请求方法")
-  console.log(req.headers, "==============请求头")
+  // console.log(req.url, "============>请求地址")
+  // console.log(req.method, "==============请求方法")
+  // console.log(req.headers, "==============请求头")
   console.log("访问如何页面，此函数都会被调用");
   // let { token } = req.query;
   // console.log(token, "==========>token")
@@ -80,11 +80,10 @@ app.use("/", indexRouter);
 // app.use('/login', loginRouter)
 // app.use('/reg', regRouter)
 // // api
-// app.use('/api', api)
+app.use('/api', api)
 // app.use("/food", food)
 
 // localhost:3000/api/login?username=admin
-
 app.use("/api", login);
 app.use("/api", reg);
 app.use("/api", put);
