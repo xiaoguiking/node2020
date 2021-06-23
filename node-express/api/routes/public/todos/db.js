@@ -12,6 +12,7 @@ exports.getDb = async () => {
 }
 
 exports.saveDb = async (db) => {
+    // json 格式化数据
     const data = JSON.stringify(db, null, " ")
     await writeFile(dbPath, data)
     return JSON.parse(data)

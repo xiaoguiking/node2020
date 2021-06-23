@@ -5,12 +5,14 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
+const dayjs = require('dayjs')
 
 const { nextTick } = require("process");
 const app = express();
 
 // mongo 操作
-require("./api/model/db");
+// require("./api/model/db");
+
 const login = require("./api/routes/public/user/login");
 const reg = require("./api/routes/public/user/reg");
 const put = require("./api/routes/public/user/updateuser");
@@ -63,6 +65,7 @@ app.use(function (req, res, next) {
   // console.log(req.url, "============>请求地址")
   // console.log(req.method, "==============请求方法")
   // console.log(req.headers, "==============请求头")
+  console.log("请求日志", req.url, req.method, dayjs(new Date()).format('YYYY-MM-DD--HH:mm:ss'))
   console.log("访问如何页面，此函数都会被调用");
   // let { token } = req.query;
   // console.log(token, "==========>token")

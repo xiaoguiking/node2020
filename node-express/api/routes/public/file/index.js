@@ -9,7 +9,7 @@ var multer = require("multer");
 
 // 根据当前文件目录指定文件夹
 const dir = path.resolve(__dirname, '../../../../public/my-uploads/');
-console.log(dir, "dir")
+// console.log(dir, "dir")
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, dir)

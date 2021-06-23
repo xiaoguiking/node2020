@@ -4,6 +4,8 @@ var express = require("express");
 var router = express.Router();
 var common = require("../../../controller/common");
 
+// Content-Type:application/x-www-form-urlencoded;charset=utf-8
+
 //引入body-parser模块
 // const bodyParser = require('body-parser');
 //配置body-parser模块
@@ -33,13 +35,12 @@ const { getDb, saveDb } = require("./db.js");
 //   next()
 // })
 
-
 /**
  * @api {get} api/todos  查询任务列表
  * @apiGroup Group   TODOS
  * @apiDescription   查询任务列表
  *
- * @apiParam {String}
+ * 
  */
 
 router.get("/todos", async (req, res) => {
@@ -52,7 +53,10 @@ router.get("/todos", async (req, res) => {
       data: data.todos,
     });
   } catch (error) {
-    common.sendJsonResponse(res, 500, err);
+    common.sendJsonResponse(res, 500, {
+      error: -1,
+      message: "获取数据失败"
+    });
   }
 });
 
@@ -83,7 +87,6 @@ router.get("/todos/:id", async (req, res) => {
       message: `根据id查询单个任务${req.params.id}`,
       data: todo,
     });
-
   } catch (error) {
     common.sendJsonResponse(res, 500, err);
   }
@@ -94,12 +97,9 @@ router.get("/todos/:id", async (req, res) => {
  * @apiGroup Group   TODOS
  * @apiDescription   添加任务
  *
- * @apiParam {String}  id
- * @apiParam {String}  id
- * @apiParam {String}  id
+ * @apiParam {String}  title
  */
 
-// req.body 获取不到内容，暂时没有解决
 router.post("/todos/add", async (req, res) => {
   console.log("添加任务");
   try {
@@ -108,98 +108,111 @@ router.post("/todos/add", async (req, res) => {
     // 2.数据验证
     if (!todo.title) {
       return common.sendJsonResponse(res, 422, {
-        message: "the title is required"
+        error: "-1",
+        message: "the title is required",
       });
     }
+
     // 3.数据验证通过，把数据存到db中
     const db = await getDb();
     let lastTodo = db.todos[db.todos.length - 1];
-    console.log(lastTodo, "11")
+    console.log(lastTodo, "11");
     todo.id = lastTodo ? lastTodo.id + 1 : 1;
-    db.todos.push(todo)
+    
+    db.todos.push(todo);
     await saveDb(db);
     common.sendResponse(res, 200, {
-      error: "1",
+      error: "0",
       message: "添加成功",
     });
-
   } catch (error) {
-    common.sendJsonResponse(res, 500, err);
+    common.sendJsonResponse(res, 500, {
+      error: "-2",
+      message: "500"
+    });
   }
-
 });
 
 /**
- * @api {patch} api/todos/:id 添加任务
+ * @api {patch} api/todos/:id 修改任务
  * @apiGroup Group   TODOS
- * @apiDescription   添加任务
+ * @apiDescription   修改任务
  *
  * @apiParam {String}    title
  */
 router.patch("/todos/:id", async (req, res) => {
   console.log("修改任务");
+  // 1.获取表单数据
   const todo = req.body;
-  console.log(todo, "===========>todo")
+  console.log(todo, "=============>todo");
+  // 获取url中id
+  console.log(req.params.id, "=============>");
   try {
+    // 2.查找要修改的任务项
     const data = await getDb();
-    const ret = data.todos.find(todo => todo.id === Number.parseInt(req.params.id))
+    const ret = data.todos.find(
+      (item) => item.id === Number.parseInt(req.params.id)
+    );
+    console.log(ret, "index");
 
     if (!ret) {
-      common.sendResponse(res, "404", {
-        message: "无对应id"
-      })
+      return common.sendResponse(res, 404, {
+        message: "无对应id修改title",
+      });
     }
-    const target = Object.assign(ret, todo)
-    console.log(todo)
-    await saveDb(ret)
+
+    Object.assign(ret, todo);
+
+    await saveDb(data);
     common.sendResponse(res, 200, {
       error: "1",
       message: "修改成功",
-      data: ret,
+      data: data,
     });
   } catch (error) {
-    common.sendJsonResponse(res, 500, error);
+    common.sendJsonResponse(res, 500, {
+      message: "修改失败",
+    });
   }
-
 });
 
 /**
  * @api {put} api/todos:id 删除任务
  * @apiGroup Group   TODOS
- * @apiDescription   添加任务
+ * @apiDescription   删除任务
  *
  * @apiParam {String}  id
  */
 router.delete("/todos/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(id, "=======>")
+  console.log(id, "=======>");
   console.log("删除任务");
   try {
     const data = await getDb();
-    const index = data.todos.findIndex(i => {
-      return i.id === Number.parseInt(id)
-    })
+    const index = data.todos.findIndex((i) => {
+      return i.id === Number.parseInt(id);
+    });
+    console.log(typeof index);
+    if (index === -1) {
+      return common.sendJsonResponse(res, 404, {
+        error: -1,
+        message: "无对应id",
+      });
+    }
 
-    // if (index = -1) {
-    //   return common.sendJsonResponse(res, 404, {
-    //     message: -1
-    //   })
-    // }
-    db.todos.splice(index, 1)
-    await saveDb(db);
+    data.todos.splice(index, 1);
+    await saveDb(data);
 
     common.sendResponse(res, 200, {
-      error: "1",
+      error: "0",
       message: "删除成功",
-      data: db,
     });
   } catch (error) {
     common.sendJsonResponse(res, 500, {
-      error: -1,
-      message: "无对应id"
+      error: -2,
+      message: "删除失败，500",
     });
   }
-
 });
 
 module.exports = router;

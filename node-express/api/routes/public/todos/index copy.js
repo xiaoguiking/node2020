@@ -7,13 +7,7 @@ var path = require("path");
 
 const { getDb } = require("./db.js");
 
-/**
- * @api {get} api/todos  查询任务列表
- * @apiGroup Group   TODOS
- * @apiDescription   查询任务列表
- *
- * @apiParam {String}
- */
+
 let PUBLIC_PATH = path.resolve(__dirname, "db.json");
 console.log(PUBLIC_PATH, "========path");
 
@@ -47,13 +41,7 @@ router.get("/todos", async (req, res) => {
   // });
 });
 
-/**
- * @api {get} api/todos/:id  根据id查询单个任务
- * @apiGroup Group   TODOS
- * @apiDescription   根据id查询单个任务
- *
- * @apiParam {String}  id
- */
+
 router.get("/todos/:id", (req, res) => {
   console.log("根据id查询单个任务");
   console.log(req.params.id, "id");
@@ -88,13 +76,7 @@ router.get("/todos/:id", (req, res) => {
   });
 });
 
-/**
- * @api {post} api/todos 添加任务
- * @apiGroup Group   TODOS
- * @apiDescription   添加任务
- *
- * @apiParam {String}  id
- */
+
 router.post("/todos", (req, res) => {
   console.log("添加任务");
   res.send({
@@ -102,13 +84,7 @@ router.post("/todos", (req, res) => {
   });
 });
 
-/**
- * @api {patch} api/todos 添加任务
- * @apiGroup Group   TODOS
- * @apiDescription   添加任务
- *
- * @apiParam {String}
- */
+
 router.patch("/todos", (req, res) => {
   console.log("修改任务");
   res.send({
@@ -116,13 +92,7 @@ router.patch("/todos", (req, res) => {
   });
 });
 
-/**
- * @api {put} api/todos:id 删除任务
- * @apiGroup Group   TODOS
- * @apiDescription   添加任务
- *
- * @apiParam {String}  id
- */
+
 router.delete("/todos:id", (req, res) => {
   console.log("删除任务");
   res.send({
