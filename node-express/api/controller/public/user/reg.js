@@ -11,10 +11,13 @@
 const common = require("../../common");
 const { User } = require("../../../model/index");
 
-module.exports.reg = function (req, res) {
-  const { userName, password, title } = req.body;
-  console.log(userName, password, title, "============> 注册")
-  
+module.exports.reg = async function (req, res) {
+  // 2.数据验证
+  // 2.1基本数据验证
+  // 2.2业务数据验证
+  // 3.验证通过将数据存到数据库中
+  // 4.发送成功响应
+
   // if (userName && password) {
   //   User.find({userName, password})
   //   .then((data) => {
@@ -40,12 +43,16 @@ module.exports.reg = function (req, res) {
   //     }
   //   })
   // }
-  res.send({
-    data: {
-      userName,
-      password,
-      title
-    }
-  })
+
+  try {
+    // 1.获取请求体数据
+    const user = new User(req.body);    
+    await user.save();
+    common.sendJsonResponse(res, 200, {
+      user
+    })
+  } catch (error) {
+
+  }
 
 };

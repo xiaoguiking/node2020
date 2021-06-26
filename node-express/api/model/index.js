@@ -5,9 +5,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const model = mongoose.model.bind(mongoose);
+const baseModel = require("./baseModel");
 
  
 var loginSchema = new Schema({
+    ...baseModel,
     userName: {
         type: String,
         require: true
@@ -24,12 +26,25 @@ var loginSchema = new Schema({
         type: String,
         require: true,
     },
+    email: {
+        type: String,
+        require: true,
+    },
+    // 描述
+    blo: {
+        type: String,
+        default: null
+    },
+    img: {
+        type: String,
+        default: null
+    },
     updateBy: String,
-    updateTime: Date
 });
 
 
 var bookSchema = new Schema({
+    ...baseModel,
     name: {
         type: String,
         required: true,
@@ -58,9 +73,6 @@ var bookSchema = new Schema({
         type: Number,
         require: true,
     },
-    time: {
-        type: Date, default: Date.now 
-    }
 })
  
 // model 参数和 mongodb数据库中的collections相关联，注意数据库中命名需要加入s -------- users 

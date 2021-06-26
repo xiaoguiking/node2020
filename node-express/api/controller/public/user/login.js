@@ -11,8 +11,9 @@
  const common = require("../../common");
  
  const {User} = require("../../../model/index")
- 
+
  module.exports.login = function (req, res) {
+
    const {userName, password} = req.query;
    console.log(userName, password)
    User.find({ userName, password},function(err,data) {

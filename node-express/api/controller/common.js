@@ -1,11 +1,10 @@
 /**
  * 通用的配置 
  */
-
-
  'use strict'
  var multer = require('multer')
  var common = {
+     
      sendJsonResponse: function(res,status,json) {
          res.header('Access-Control-Allow-Origin', '*');
          res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
