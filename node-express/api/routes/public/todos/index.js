@@ -43,7 +43,7 @@ const { getDb, saveDb } = require("./db.js");
  * 
  */
 
-router.get("/todos", async (req, res) => {
+router.get("/todos", async (req, res, next) => {
   console.log("查询任务列表");
   try {
     const data = await getDb();
@@ -52,11 +52,13 @@ router.get("/todos", async (req, res) => {
       message: "查询成功",
       data: data.todos,
     });
-  } catch (error) {
-    common.sendJsonResponse(res, 500, {
-      error: -1,
-      message: "获取数据失败"
-    });
+  } catch (err) {
+    // 调用错误处理中间件
+    next(err)
+    // common.sendJsonResponse(res, 500, {
+    //   error: -1,
+    //   message: "获取数据失败"
+    // });
   }
 });
 

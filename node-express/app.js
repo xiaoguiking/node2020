@@ -11,7 +11,7 @@ const { nextTick } = require("process");
 const app = express();
 
 // mongo 操作
-// require("./api/model/db");
+require("./api/model/db"); 
 
 const login = require("./api/routes/public/user/login");
 const reg = require("./api/routes/public/user/reg");
@@ -50,9 +50,9 @@ app.engine("html", ejs.__express);
 app.set("view engine", "html");
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
 // parse application/json
 app.use(bodyParser.json());
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -61,6 +61,12 @@ app.use(cookieParser());
 // http://localhost:3000/images/book1.jpg
 app.use(express.static(path.join(__dirname, "public")));
 
+/**
+ * req  请求对象
+ * res  响应对象
+ * next 下一个中间件
+ * 放置顺序重要
+ */
 app.use(function (req, res, next) {
   // console.log(req.url, "============>请求地址")
   // console.log(req.method, "==============请求方法")
@@ -74,6 +80,8 @@ app.use(function (req, res, next) {
   // } else {
   //   res.send("缺少token")
   // }
+
+  // 交出执行权，然后继续匹配执行。 
   next();
 });
 
@@ -105,12 +113,13 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error handler 错误处理中间件
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
   // render the error page
+  console.log("错误", err)
   res.status(err.status || 500);
   res.render("error");
 });

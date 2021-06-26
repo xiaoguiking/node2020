@@ -267,6 +267,113 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "api/todos",
+    "title": "查询任务列表",
+    "group": "Group_TODOS",
+    "description": "<p>查询任务列表</p>",
+    "version": "0.0.0",
+    "filename": "api/routes/public/todos/index.js",
+    "groupTitle": "Group_TODOS",
+    "name": "GetApiTodos"
+  },
+  {
+    "type": "get",
+    "url": "api/todos/:id",
+    "title": "根据id查询单个任务",
+    "group": "Group_TODOS",
+    "description": "<p>根据id查询单个任务</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/public/todos/index.js",
+    "groupTitle": "Group_TODOS",
+    "name": "GetApiTodosId"
+  },
+  {
+    "type": "patch",
+    "url": "api/todos/:id",
+    "title": "修改任务",
+    "group": "Group_TODOS",
+    "description": "<p>修改任务</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/public/todos/index.js",
+    "groupTitle": "Group_TODOS",
+    "name": "PatchApiTodosId"
+  },
+  {
+    "type": "post",
+    "url": "api/todos/add",
+    "title": "添加任务",
+    "group": "Group_TODOS",
+    "description": "<p>添加任务</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/public/todos/index.js",
+    "groupTitle": "Group_TODOS",
+    "name": "PostApiTodosAdd"
+  },
+  {
+    "type": "put",
+    "url": "api/todos:id",
+    "title": "删除任务",
+    "group": "Group_TODOS",
+    "description": "<p>删除任务</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/public/todos/index.js",
+    "groupTitle": "Group_TODOS",
+    "name": "PutApiTodosId"
+  },
+  {
+    "type": "get",
     "url": "api/user/login",
     "title": "用户登录",
     "group": "Group_user",
