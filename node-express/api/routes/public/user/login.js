@@ -1,7 +1,7 @@
 'use strict';
 var express = require('express');
-var controller = require('../../../controller/public/login');
+var controller = require('../../../controller/public/user/login');
 var router = express.Router();
-router.get('/login', controller.login);
+router.get('/users/login', controller.login);
 
 module.exports = router;

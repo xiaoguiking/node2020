@@ -6,6 +6,8 @@ const logger = require("morgan");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const dayjs = require('dayjs')
+const cors = require("cors")
+const errorHandler = require("./middleware/index");
 
 const { nextTick } = require("process");
 const app = express();
@@ -16,6 +18,11 @@ require("./api/model/db");
 const login = require("./api/routes/public/user/login");
 const reg = require("./api/routes/public/user/reg");
 const put = require("./api/routes/public/user/updateuser");
+
+const getUser = require("./api/routes/public/user/getuser")
+const getUserInfo = require("./api/routes/public/user/getUserInfo")
+const unfollowUser = require("./api/routes/public/user/unfollowUser")
+const focusUser = require("./api/routes/public/user/focusUser")
 
 // 路由配置
 const indexRouter = require("./routes/index");
@@ -52,11 +59,12 @@ app.set("view engine", "html");
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(cors())
+
 // 访问静态资源实例
 // http://localhost:3000/images/book1.jpg
 app.use(express.static(path.join(__dirname, "public")));
@@ -98,6 +106,12 @@ app.use('/api', api)
 app.use("/api", login);
 app.use("/api", reg);
 app.use("/api", put);
+app.use("/api", getUser)
+
+app.use("/api", getUserInfo)
+app.use("/api", focusUser)
+app.use("/api", unfollowUser)
+
 app.use("/api", todos)
 
 app.use("/api/book", addBook);
@@ -113,15 +127,18 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+
 // error handler 错误处理中间件
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-  // render the error page
-  console.log("错误", err)
-  res.status(err.status || 500);
-  res.render("error");
-});
+app.use(errorHandler())
+// error handler 错误处理中间件
+// app.use(function (err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get("env") === "development" ? err : {};
+//   // render the error page
+//   console.log("错误", err)
+//   res.status(err.status || 500);
+//   res.render("error");
+// });
 
 module.exports = app;

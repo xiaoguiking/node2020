@@ -1,5 +1,5 @@
 /**
- * @api {post} api/user/reg  用户注册
+ * @api {post} api/users/reg  用户注册
  * @apiGroup Group   user
  * @apiDescription 用户注册
  *
@@ -8,8 +8,8 @@
  */
 
 
-const common = require("../common");
-const { User } = require("../../model/index");
+const common = require("../../common");
+const { User } = require("../../../model/index");
 
 module.exports.reg = function (req, res) {
   const { userName, password, title } = req.body;

@@ -1,6 +1,6 @@
 
 /**
- * @api {post} api/user/put  更新用户信息
+ * @api {post} api/users/put  更新当前用户信息
  * @apiGroup Group   user
  * @apiDescription 更新用户信息
  *
@@ -10,8 +10,8 @@
  * @apiParam {String} title  标题
  */
 
-const common = require("../common");
-const { User } = require("../../model/index");
+const common = require("../../common");
+const { User } = require("../../../model/index");
 
 //更新用户信息
 module.exports.put= function (req, res) {

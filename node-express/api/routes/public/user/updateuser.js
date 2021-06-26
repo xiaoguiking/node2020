@@ -1,7 +1,7 @@
 'use strict';
 var express = require('express');
-var controller = require('../../../controller/public/updateuser');
+var controller = require('../../../controller/public/user/updateuser');
 var router = express.Router();
-router.put('/user/put', controller.put);
+router.put('/users/put', controller.put);
 
 module.exports = router;
