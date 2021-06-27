@@ -46,8 +46,11 @@ module.exports.reg = async function (req, res) {
 
   try {
     // 1.获取请求体数据
-    const user = new User(req.body);    
+    let user = new User(req.body);    
     await user.save();
+    // 转换成普通数据删除
+    user = user.toJSON();
+    delete user.password
     common.sendJsonResponse(res, 200, {
       user
     })

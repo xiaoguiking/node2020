@@ -1,4 +1,3 @@
-
 /**
  *  数据结构模型
  */
@@ -6,7 +5,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const model = mongoose.model.bind(mongoose);
 const baseModel = require("./baseModel");
-
+// md5
+const md5 = require("../../utils/md5")
  
 var loginSchema = new Schema({
     ...baseModel,
@@ -16,7 +16,11 @@ var loginSchema = new Schema({
     },
     password: {
         type: String,
-        require: true
+        require: true,
+        // 设置md5加密
+        set: value => md5(value),
+        // 查询数据隐藏pwd,创建数据不会隐藏
+        select: false
     },
     createTime: {
         type: Date,
