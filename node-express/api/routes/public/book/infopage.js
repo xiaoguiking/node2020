@@ -1,7 +1,7 @@
 
 'use strict';
 var express = require('express');
-var controller = require('../../../controller/public/book/infopage');
+var controller = require('../../../controller/public/book/getInfoByPage');
 var router = express.Router();
 router.post('/getInfoByPage', controller.getInfoByPage);
 

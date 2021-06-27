@@ -18,6 +18,16 @@
          res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
          res.status(status);
          return res.send(msg);
-     }
+     },
+
+     sendFormResponse: function(res,status,json) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+        res.set({'Content-Type':'application/x-www-form-urlencoded'});
+        res.set({'Accept':'*/*'})
+        res.status(status);
+        return res.json(json);
+    },
  };
  module.exports = common;

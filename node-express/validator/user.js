@@ -1,6 +1,7 @@
-const { body } = require('express-validator');
+const { body, query } = require('express-validator');
 const validate = require("../middleware/validator")
 const { User } = require("../api/model/index")
+const md5 = require("../utils/md5")
 
 exports.reg = validate([
     // 1.配置验证规则
@@ -40,3 +41,34 @@ exports.reg = validate([
     // },
     // 3.通过验证执行具体的控制器
 ])
+
+
+exports.login = [validate([
+    query('password')
+        .notEmpty().withMessage("密码不能为空"),
+
+    query('email')
+        .notEmpty().withMessage("邮箱不能为空")
+]),
+validate([
+    query('email')
+        .custom(async (email, { req }) => {
+            const user = await User.findOne({ email })
+            .select(["password", 'email', 'userName', 'bio', 'image',]);
+            if (!user) {
+                return Promise.reject("用户不存在")
+            }
+            // 将数据挂载到请求对象中，后续的中间件可以使用 
+            req.query = user;
+        }),
+
+    query('password')
+        .custom(async (password, {req}) => {
+            console.log(password, "初始")
+            console.log(req.query.password)
+            if (md5(password) !== req.query.password) {
+                return Promise.reject("密码错误")
+            }
+        }),
+])
+]

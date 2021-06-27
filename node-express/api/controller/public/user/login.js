@@ -7,7 +7,12 @@
  * @apiParam {String} password  密码
  */
 
- const mongoose = require("mongoose");
+
+/**
+ * 1.数据验证
+ * 2.生成token
+ * 3.发送成功响应 包含token的用户信息
+ */
  const common = require("../../common");
  
  const {User} = require("../../../model/index")
@@ -34,8 +39,6 @@
          }
          common.sendResponse(res, 200,data)
        }
-       // console.log(data, "==============>data")
-       // common.sendResponse(res, 200, data);
    })
  
  };
