@@ -15,9 +15,9 @@ module.exports.getInfoByPage = function (req, res) {
     let page = req.body.page || 1;  // 第几页
     let pageSize = req.body.pageSize || 5;
     // let status  = req.body.status|| "";
-    let status = req.body.status;
+    // let status = req.body.status;
     console.log(req.body, "body")
-    console.log(page, pageSize, status, "=========>")
+    // console.log(page, pageSize, status, "=========>")
 
     BookModel.find({}, function (err, data) {
         if (err) return common.sendResponse(res, 500, {
@@ -27,7 +27,7 @@ module.exports.getInfoByPage = function (req, res) {
 
         let count = data.length;
         console.log(count)
-        BookModel.find({status: 1}).limit(Number(pageSize)).skip(Number(page - 1) * pageSize).exec(function (err, data) {
+        BookModel.find().limit(Number(pageSize)).skip(Number(page - 1) * pageSize).exec(function (err, data) {
             if (err) return  common.sendResponse(res, 500, {
                 result: 1,
                 error_info: '服务器繁忙，请稍后重试！'

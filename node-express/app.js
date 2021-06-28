@@ -41,6 +41,7 @@ const findBook = require("./api/routes/public/book/findBook");
 const deleteBook = require("./api/routes/public/book/deleteBook");
 const updateBook = require("./api/routes/public/book/updateBook");
 const getInfoByPage = require("./api/routes/public/book/infopage");
+const getChannels = require("./api/routes/public/book/getChannels")
 
 // todos
 
@@ -120,6 +121,7 @@ app.use("/api/book", findBook);
 app.use("/api/book", deleteBook);
 app.use("/api/book", updateBook);
 app.use("/api/book", getInfoByPage);
+// app.use("/api/book", getChannels);
 
 app.use("/file", uploadFile);
 

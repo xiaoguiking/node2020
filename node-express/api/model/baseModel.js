@@ -1,5 +1,5 @@
 module.exports = {
-    createAt: {
+    createTime: {
         type: Date,
         default: Date.now
     },
