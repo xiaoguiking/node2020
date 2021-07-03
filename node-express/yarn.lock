@@ -363,6 +363,11 @@ bson@^1.1.4:
   resolved "https://registry.nlark.com/bson/download/bson-1.1.6.tgz#fb819be9a60cd677e0853aee4ca712a785d6618a"
   integrity sha1-+4Gb6aYM1nfghTruTKcSp4XWYYo=
 
+buffer-equal-constant-time@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.nlark.com/buffer-equal-constant-time/download/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
+  integrity sha1-+OcRMvf/5uAaXJaXpMbz5I1cyBk=
+
 buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/buffer-from/download/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
@@ -843,6 +848,13 @@ eazy-logger@3.1.0:
   integrity sha1-sWnrVt9xRgj6EU8WTIopVr7J8PM=
   dependencies:
     tfunk "^4.0.0"
+
+ecdsa-sig-formatter@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.nlark.com/ecdsa-sig-formatter/download/ecdsa-sig-formatter-1.0.11.tgz#ae0f0fa2d85045ef14a817daa3ce9acd0489e5bf"
+  integrity sha1-rg8PothQRe8UqBfao86azQSJ5b8=
+  dependencies:
+    safe-buffer "^5.0.1"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -1427,6 +1439,22 @@ jsonfile@^3.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+jsonwebtoken@^8.5.1:
+  version "8.5.1"
+  resolved "https://registry.nlark.com/jsonwebtoken/download/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
+  integrity sha1-AOceC431TCEhofJhN98igGc7zA0=
+  dependencies:
+    jws "^3.2.2"
+    lodash.includes "^4.3.0"
+    lodash.isboolean "^3.0.3"
+    lodash.isinteger "^4.0.4"
+    lodash.isnumber "^3.0.3"
+    lodash.isplainobject "^4.0.6"
+    lodash.isstring "^4.0.1"
+    lodash.once "^4.0.0"
+    ms "^2.1.1"
+    semver "^5.6.0"
+
 jstransformer@0.0.2:
   version "0.0.2"
   resolved "https://registry.npm.taobao.org/jstransformer/download/jstransformer-0.0.2.tgz#7aae29a903d196cfa0973d885d3e47947ecd76ab"
@@ -1434,6 +1462,23 @@ jstransformer@0.0.2:
   dependencies:
     is-promise "^2.0.0"
     promise "^6.0.1"
+
+jwa@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.nlark.com/jwa/download/jwa-1.4.1.tgz#743c32985cb9e98655530d53641b66c8645b039a"
+  integrity sha1-dDwymFy56YZVUw1TZBtmyGRbA5o=
+  dependencies:
+    buffer-equal-constant-time "1.0.1"
+    ecdsa-sig-formatter "1.0.11"
+    safe-buffer "^5.0.1"
+
+jws@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.nlark.com/jws/download/jws-3.2.2.tgz#001099f3639468c9414000e99995fa52fb478304"
+  integrity sha1-ABCZ82OUaMlBQADpmZX6UvtHgwQ=
+  dependencies:
+    jwa "^1.4.1"
+    safe-buffer "^5.0.1"
 
 kareem@2.3.2:
   version "2.3.2"
@@ -1499,10 +1544,45 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.includes@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.nlark.com/lodash.includes/download/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
+  integrity sha1-YLuYqHy5I8aMoeUTJUgzFISfVT8=
+
+lodash.isboolean@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.nlark.com/lodash.isboolean/download/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
+  integrity sha1-bC4XHbKiV82WgC/UOwGyDV9YcPY=
+
 lodash.isfinite@^3.3.2:
   version "3.3.2"
   resolved "https://registry.npm.taobao.org/lodash.isfinite/download/lodash.isfinite-3.3.2.tgz#fb89b65a9a80281833f0b7478b3a5104f898ebb3"
   integrity sha1-+4m2WpqAKBgz8LdHizpRBPiY67M=
+
+lodash.isinteger@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.nlark.com/lodash.isinteger/download/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
+  integrity sha1-YZwK89A/iwTDH1iChAt3sRzWg0M=
+
+lodash.isnumber@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.nlark.com/lodash.isnumber/download/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
+  integrity sha1-POdoEMWSjQM1IwGsKHMX8RwLH/w=
+
+lodash.isplainobject@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.nlark.com/lodash.isplainobject/download/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
+  integrity sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
+
+lodash.isstring@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.nlark.com/lodash.isstring/download/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
+  integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
+
+lodash.once@^4.0.0:
+  version "4.1.1"
+  resolved "https://registry.nlark.com/lodash.once/download/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+  integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
 
 lodash@^4.17.10, lodash@^4.17.20, lodash@^4.17.21:
   version "4.17.21"
@@ -2099,7 +2179,7 @@ safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   resolved "https://registry.npm.taobao.org/safe-buffer/download/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   integrity sha1-mR7GnSluAxN0fVm9/St0XDX4go0=
 
-safe-buffer@5.2.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2:
+safe-buffer@5.2.1, safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2:
   version "5.2.1"
   resolved "https://registry.nlark.com/safe-buffer/download/safe-buffer-5.2.1.tgz#1eaf9fa9bdb1fdd4ec75f58f9cdb4e6b7827eec6"
   integrity sha1-Hq+fqb2x/dTsdfWPnNtOa3gn7sY=
@@ -2123,7 +2203,7 @@ semver-diff@^3.1.1:
   dependencies:
     semver "^6.3.0"
 
-semver@^5.7.1:
+semver@^5.6.0, semver@^5.7.1:
   version "5.7.1"
   resolved "https://registry.npm.taobao.org/semver/download/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
   integrity sha1-qVT5Ma66UI0we78Gnv8MAclhFvc=
