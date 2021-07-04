@@ -74,7 +74,7 @@ var bookSchema = new Schema({
         required: true,
     },
     status: {
-        type: String,
+        type: Number,
         require: true,
     },
 })

@@ -29,7 +29,10 @@ module.exports.login = async function (req, res) {
     const user = req.user.toJSON();
     const token = await jwt.sign({
       userId: user._id
-    }, jwtSecret)
+    }, jwtSecret, {
+      // 过期时间 一天
+      expiresIn: 60* 60 * 24
+    })
 
     User.find({ userName, email }, function (err, data) {
       //  发送成功响应

@@ -6,14 +6,13 @@
  * @apiParam {String} _id   唯一id
  */
 
-
- const mongoose = require("mongoose");
  const common = require("../../common");
  
  const { BookModel } = require("../../../model/index")
  
  module.exports.delete = function (req, res) {
      const {_id } =req.body
+     console.log(_id, "id")
     //  多项删除案例
     // deleteMany({_id: [id1,id2,id3]})
     BookModel.deleteMany({_id}, function (err, data) {

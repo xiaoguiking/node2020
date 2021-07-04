@@ -216,6 +216,7 @@ app.use("/api", router);
 
 ## JWT 用户身份信息验证 39 - 43
 
+
 ### 跨域认证问题(流程)
 
 - 1.用户向服务器发送用户名和密码。
@@ -292,3 +293,29 @@ Signature 对前两部分数据的签名，防止被篡改。
   Authorization: Bearer <token>
   ```
 - 3.跨域时候,放在jwt的post请求体里面
+
+
+> 时间记录查询
+
+```
+db.getCollection('base_user_info').find({"create_time":{"$gte":ISODate("2018-03-29 07:59:06"),"$lte":ISODate("2018-03-29 08:30:46")}});
+```
+
+```
+static async list(ctx) {
+    const date_in = ctx.request.body.datein;        //入住时间  2019-7-3
+    const date_out = ctx.request.body.dateout;      //离店时间  2019-7-4
+    
+    const orders = await OrderModel.find({
+        datein: {
+            '$gte': date_in                 // $gte 大于等于
+        },
+        dateout: {
+            '$lte': date_out                // $lte 小于等于
+        },
+        status: {
+            '$in': [1,2,3]                  // $in 在多个值范围内
+        }
+    })
+}
+```
