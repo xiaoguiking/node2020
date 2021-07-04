@@ -14,10 +14,12 @@ const { User } = require("../../../model/index");
 const { nextTick } = require("process");
 
 module.exports.getUser =  function (req, res) {
-  //  const {userName, password} = req.query;
+  console.log(req.headers, "请求头")
   try {
-    JSON.parse("12ksdlkfj")
-    res.send("getUser");
+    // res.send("getUser获取当前用户登录信息");
+    common.sendJsonResponse(res, 200, {
+      user: req.user
+    })
   } catch (err) {
     nextTick(err);
   }

@@ -43,32 +43,37 @@ exports.reg = validate([
 ])
 
 
-exports.login = [validate([
-    query('password')
-        .notEmpty().withMessage("密码不能为空"),
+exports.login = [
+    validate([
+        query('password')
+            .notEmpty().withMessage("密码不能为空"),
 
-    query('email')
-        .notEmpty().withMessage("邮箱不能为空")
-]),
-validate([
-    query('email')
-        .custom(async (email, { req }) => {
-            const user = await User.findOne({ email })
-            .select(["password", 'email', 'userName', 'bio', 'image',]);
-            if (!user) {
-                return Promise.reject("用户不存在")
-            }
-            // 将数据挂载到请求对象中，后续的中间件可以使用 
-            req.query = user;
-        }),
-
-    query('password')
-        .custom(async (password, {req}) => {
-            console.log(password, "初始")
-            console.log(req.query.password)
-            if (md5(password) !== req.query.password) {
-                return Promise.reject("密码错误")
-            }
-        }),
-])
+        query('email')
+            .notEmpty().withMessage("邮箱不能为空")
+    ]),
+    validate([
+        query('email')
+            .custom(async (email, { req }) => {
+                const user = await User.findOne({ email })
+                    .select(["password", 'email', 'userName', 'bio', 'image',]);
+                if (!user) {
+                    return Promise.reject("用户不存在")
+                }
+                // 将数据挂载到请求对象中，后续的中间件可以使用 
+                // req.query = user;
+                req.user = user
+                // console.log(req.user, "11")
+            }),
+    ]),
+    validate([
+        query('password')
+            .custom(async (password, { req }) => {
+                console.log(req.user, "11")
+                console.log(md5(password), "用户")
+                // console.log(req.user.password, "数据库")
+                if (md5(password) !== req.user.password) {
+                    return Promise.reject("密码错误")
+                }
+            }),
+    ])
 ]
