@@ -15,6 +15,9 @@
    try {
      console.log(req.body)
      const article = ArticlesModel(req.body.article)
+     article.author = req.user;
+     article.populate("author").execPopulate()
+    console.log(req.user, "use")
      await article.save()
 
      return common.sendJsonResponse(res, 200, {
@@ -22,7 +25,6 @@
        message: "提交成功",
        list: article
      })
-     res.send("createArticle");
    } catch (err) {
      nextTick(err);
    }

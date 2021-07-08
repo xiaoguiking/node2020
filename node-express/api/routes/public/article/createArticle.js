@@ -5,10 +5,10 @@ var controller = require('../../../controller/public/article/createArticle');
 var router = express.Router();
 var {createArticle} = require("../../../../validator/articles")
 // var auth = require("../../../../utils/jwt")
-
+var auth = require("../../../../middleware/auth")
 
 router.post('/',
-//   auth,
+  auth,
   createArticle,
  controller.createArticle);
 

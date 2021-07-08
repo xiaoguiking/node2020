@@ -4,6 +4,7 @@ const {jwtSecret} = require("../api/config/db");
 const common = require("../api/controller/common");
 const {User} = require("../api/model/index")
 
+// Bearer
 module.exports = async (req, res, next) => {
     // 验证token是否有效
     // 无效 ---- 响应401状态码
