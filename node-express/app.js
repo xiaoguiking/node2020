@@ -35,7 +35,7 @@ const food = require("./routes/food");
 const todos = require("./api/routes/public/todos/index")
 
 
-// 书籍接口api
+// book接口api
 const addBook = require("./api/routes/public/book/addBook");
 const findBook = require("./api/routes/public/book/findBook");
 const deleteBook = require("./api/routes/public/book/deleteBook");
@@ -43,9 +43,11 @@ const updateBook = require("./api/routes/public/book/updateBook");
 const getInfoByPage = require("./api/routes/public/book/infopage");
 const getChannels = require("./api/routes/public/book/getChannels")
 
+
+//  articles
+const createArticle = require("./api/routes/public/article/createArticle")
+
 // todos
-
-
 const uploadFile = require("./api/routes/public/file/index");
 
 console.log("Server running at http://localhost:3000");
@@ -122,6 +124,16 @@ app.use("/api/book", deleteBook);
 app.use("/api/book", updateBook);
 app.use("/api/book", getInfoByPage);
 // app.use("/api/book", getChannels);
+
+
+// articles
+app.use("/api/article", createArticle)
+
+
+
+
+
+
 
 app.use("/file", uploadFile);
 

@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const model = mongoose.model.bind(mongoose);
 const baseModel = require("./baseModel");
+
 // md5
 const md5 = require("../../utils/md5")
  
@@ -79,13 +80,49 @@ var bookSchema = new Schema({
     },
 })
  
+
+var articleSchema = new Schema({
+    ...baseModel,
+     title:  {
+         type: String,
+         required: true
+     },
+     description:  {
+         type: String,
+         required: true
+     },
+     title:  {
+         type: String,
+         required: true
+     },
+     body:  {
+         type: String,
+         required: true
+     },
+     tagList:  {
+         type: [String],
+         default: null
+     },
+     favoritesCount: {
+        type: Number,
+        default: 0
+     },
+     author:{
+         type: Schema.Types.ObjectId,
+         ref: "User"
+     }
+
+})
+
 // model 参数和 mongodb数据库中的collections相关联，注意数据库中命名需要加入s -------- users 
 const User = model('User', loginSchema)
 const BookModel = model('books', bookSchema)
+const ArticlesModel = model('articles', articleSchema)
 
 // module.exports = mongoose.model('user',loginSchema,'login');
 
 module.exports = {
     User,
-    BookModel
+    BookModel,
+    ArticlesModel
 }
