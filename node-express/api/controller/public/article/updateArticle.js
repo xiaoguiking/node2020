@@ -1,10 +1,9 @@
 /**
- * @api {get} api/articles/:articleId 获取文章
- * @apiGroup Group  api
- * @apiDescription 获取文章
+ * @api {put} api/articles/:articleId 更新文章
+ * @apiGroup Group  article
+ * @apiDescription 更新文章
  *
  * @apiParam {String} articleId 文章id 
- * @apiParam {String} password  
  */
 
  const mongoose = require("mongoose");
@@ -12,12 +11,11 @@
  
  const { ArticlesModel } = require("../../../model/index");
  
- module.exports.getArticle =  async function (req, res) {
+ module.exports.updateArticle =  async function (req, res) {
    try {
     console.log(req.params.articleId, "id")
     const article = await ArticlesModel.findById(req.params.articleId).populate('author');
 
-    console.log(article, "getArticle======>")
     if (!article) {
       return common.sendResponse(res, 401, {
         res: -1,

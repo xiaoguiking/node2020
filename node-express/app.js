@@ -46,9 +46,13 @@ const getChannels = require("./api/routes/public/book/getChannels")
 
 //  articles
 const createArticle = require("./api/routes/public/article/createArticle")
+const getArticle = require("./api/routes/public/article/getArticle")
+const getArticlesList  = require("./api/routes/public/article/getArticlesList")
+const updateArticle = require("./api/routes/public/article/updateArticle");
 
 // todos
 const uploadFile = require("./api/routes/public/file/index");
+
 
 console.log("Server running at http://localhost:3000");
 
@@ -128,6 +132,9 @@ app.use("/api/book", getInfoByPage);
 
 // articles
 app.use("/api/article", createArticle)
+app.use("/api/article", getArticlesList)
+app.use("/api/article", updateArticle)
+app.use("/api/article", getArticle)
 
 
 

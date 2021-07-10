@@ -119,6 +119,8 @@ const User = model('User', loginSchema)
 const BookModel = model('books', bookSchema)
 const ArticlesModel = model('articles', articleSchema)
 
+
+
 // module.exports = mongoose.model('user',loginSchema,'login');
 
 module.exports = {
