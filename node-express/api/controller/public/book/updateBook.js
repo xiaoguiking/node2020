@@ -1,11 +1,6 @@
-/**
- * 接口  
- * 更新
- *  api/food/update
- */
 
 /**
- * @api {post} api/book/update  更新某条数据
+ * @api {put} api/book/:bookId  更新某条数据
  * @apiGroup Group   Book
  * @apiDescription   分页获取数据
  *
@@ -18,43 +13,68 @@
  * @apiParam {String} status   文章状态
  * @apiParam {String} _id   唯一id
  */
+
+// 60e178a569a1910b57120f42
 const mongoose = require("mongoose");
-const common = require("../../common");
+const {sendJsonResponse} = require("../../common");
 
 const { BookModel } = require("../../../model/index")
 
-module.exports.update = function (req, res) {
-    const {
-        name,
-        price,
-        desc,
-        typename,
-        typeid,
-        img,
-        _id
-    } = req.body;
+// module.exports.update = async function (req, res) {
+//     console.log(req.params.bookId, "id")
+//     console.log(req.body.title)
+//     const book = await BookModel.findById(ObjectId(req.params.bookId))
+//     console.log(book, "book")
+//     const {
+//         name = book.name,
+//         price = book.price,
+//         desc = book.desc,
+//         typename = book.typename,
+//         typeid = book.typeid,
+//         img = book.img,
+//     } = req.body;
 
-    console.log(_id, "========")
-    BookModel.updateMany({ _id }, {
-        name,
-        price,
-        desc,
-        typename,
-        typeid,
-        img,
-    }, function (err, data) {
-        if (_id.length > 0) {
-            common.sendResponse(res, 200, {
-                error: "0",
-                message: "update ok",
-                list: data
-            })
-        } else {
-            common.sendResponse(res, 200, {
-                error: "-1",
-                message: "update fail",
-            })
-        }
-    })
+//     BookModel.updateMany({ _id: ObjectId(req.params.bookId) }, {
+//         name,
+//         price,
+//         desc,
+//         typename,
+//         typeid,
+//         img,
+//     }, function (err, data) {
+//         if (_id.length > 0) {
+//             sendJsonResponse(res, 200, {
+//                 error: "0",
+//                 message: "update ok",
+//                 list: data
+//             })
+//         } else {
+//             sendJsonResponse(res, 200, {
+//                 error: "-1",
+//                 message: "update fail",
+//             })
+//         }
+//     })
+// }
+
+module.exports.updateBook = async function (req, res, next) {
+    try {
+    console.log(req.params.bookId, "id")
+    const book = await BookModel.findById(req.params.bookId)
+    
+    const bodyBook = req.body.book;
+    console.log(bodyBook, "bodybook")
+    book.name = bodyBook.name ||  book.name;
+
+    console.log(book.name, "booke")
+    await book.save()
+    console.log(await book.save())
+    sendJsonResponse(res, 200, {
+        res: 0,
+        message: "更新成功",
+        list: book
+      })
+    } catch (error) {
+        next(error)
+    }
 }
-

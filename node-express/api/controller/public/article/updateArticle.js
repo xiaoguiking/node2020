@@ -10,7 +10,6 @@
 
  const mongoose = require("mongoose");
  const common = require("../../common");
- const { ArticlesModel } = require("../../../model/index");
  
 
  module.exports.updateArticle =  async function (req, res) {
