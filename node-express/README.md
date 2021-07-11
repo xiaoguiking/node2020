@@ -215,8 +215,6 @@ app.use("/api", router);
 - cors
 
 ## JWT 用户身份信息验证 39 - 43
-
-
 ### 跨域认证问题(流程)
 
 - 1.用户向服务器发送用户名和密码。
@@ -302,6 +300,7 @@ db.getCollection('base_user_info').find({"create_time":{"$gte":ISODate("2018-03-
 ```
 
 ```
+
 static async list(ctx) {
     const date_in = ctx.request.body.datein;        //入住时间  2019-7-3
     const date_out = ctx.request.body.dateout;      //离店时间  2019-7-4
@@ -317,5 +316,55 @@ static async list(ctx) {
             '$in': [1,2,3]                  // $in 在多个值范围内
         }
     })
+}
+```
+
+
+## 项目登录记录
+
+```
+admin  admin  token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGQ4MjQ1ZTAxYzQzNDY0ZTNmYjEyMDciLCJpYXQiOjE2MjUzNjY0NDZ9.KoDrH1HRbPhFGHfANHL_SVGN8NNh0aKRaGvFxbDHBO8   60d8245e01c43464e3fb1207
+
+风凌天下 fengling  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGVhMzhiOGFkNDU5NzkxNjQ0NGQ4YzciLCJpYXQiOjE2MjU5NjI5NjUsImV4cCI6MTYyNjA0OTM2NX0.5F7pgDNMmN6WZd5Q7CnegNQeSpEi-04ke4xduRzFlFI    60ea38b8ad4597916444d8c7
+ 
+
+
+{
+	"article": {
+		"title": "雪中",
+		"description":"雪中悍刀行",
+		"body":"烽火戏诸侯所著",
+		"tagList": ["dragons", "fire"]
+	}
+}
+
+{
+    "res": 1,
+    "message": "提交成功",
+    "list": {
+        "tagList": [
+            "jianlai",
+            "fire"
+        ],
+        "favoritesCount": 0,
+        "_id": "60ea3a63ad4597916444d8c8",
+        "title": "剑来",
+        "description": "剑来,一剑斩15",
+        "body": "烽火戏诸侯所著",
+        "createTime": "2021-07-11T00:25:07.749Z",
+        "updateTime": "2021-07-11T00:25:07.749Z",
+        "author": {
+            "blo": null,
+            "img": null,
+            "_id": "60ea38b8ad4597916444d8c7",
+            "userName": "风凌天下",
+            "title": "天下",
+            "email": "fengling@163.com",
+            "createTime": "2021-07-11T00:18:00.176Z",
+            "updateTime": "2021-07-11T00:18:00.176Z",
+            "__v": 0
+        },
+        "__v": 0
+    }
 }
 ```

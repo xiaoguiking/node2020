@@ -9,7 +9,7 @@
  const common = require("../../common");
  
  const {  ArticlesModel } = require("../../../model/index");
- const { nextTick } = require("process");
+
  
  module.exports.createArticle = async function (req, res) {
    try {
@@ -17,7 +17,6 @@
      const article = ArticlesModel(req.body.article)
      article.author = req.user;
      article.populate("author").execPopulate()
-    console.log(req.user, "use")
      await article.save()
 
      return common.sendJsonResponse(res, 200, {
@@ -26,7 +25,7 @@
        list: article
      })
    } catch (err) {
-     nextTick(err);
+     next(err);
    }
  };
  

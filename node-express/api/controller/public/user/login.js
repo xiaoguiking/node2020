@@ -24,7 +24,7 @@ const { jwtSecret } = require("../../../config/db")
 module.exports.login = async function (req, res) {
   try {
     const { userName, email } = req.query;
-    console.log(userName, "name")
+    // console.log(userName, "name")
     //  const user = req.query.toJSON();
     const user = req.user.toJSON();
     const token = await jwt.sign({

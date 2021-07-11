@@ -15,9 +15,11 @@
  module.exports.getArticle =  async function (req, res) {
    try {
     console.log(req.params.articleId, "id")
-    const article = await ArticlesModel.findById(req.params.articleId).populate('author');
+    // const article = await ArticlesModel.findById(req.params.articleId).populate('author');
+    const article = await ArticlesModel.find({author:req.params.articleId}).populate('author');
 
     console.log(article, "getArticle======>")
+
     if (!article) {
       return common.sendResponse(res, 401, {
         res: -1,
@@ -32,7 +34,8 @@
       })
 
    } catch (err) {
-     next(err);
+    //  next(err);
+    console.log(err, "error")
    }
  };
  

@@ -5,6 +5,8 @@
  *
  * @apiParam {String} userName  用户名
  * @apiParam {String} password  密码
+ * @apiParam {String} email  邮箱
+ * @apiParam {String} title  title
  */
 
 
@@ -55,7 +57,6 @@ module.exports.reg = async function (req, res) {
       user
     })
   } catch (error) {
-
+    next(error)
   }
-
 };

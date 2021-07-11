@@ -31,17 +31,22 @@ exports.getArticle = validate([
 
 
 
-// 检验文章是否存在
-// 修改文章的作者是否是当前登录的作者
+
+
 exports.updateArticle = [
     //     // 雷同 getArticle 
     //     // 采用函数封装调用
+    // 校验ObjectId
     validate.isValidObjectId(['params', 'articleId']),
 
+    // 检验文章是否存在
     async (req, res, next) => {
         const articleId = req.params.articleId;
         console.log(articleId, "id")
         const article = await ArticlesModel.findById(articleId)
+        // const article = await ArticlesModel.find({articleId})
+        console.log(article, "风铃")
+        req.article = article;
         if(!article) {
             return sendResponse(res, 404, {
                 res: -1,
@@ -50,6 +55,22 @@ exports.updateArticle = [
         }
 
         next()
-    }
+    },
 
+    // 修改文章的作者是否是当前登录的作者
+    // async (req, res, next) => {
+    //     console.log(req.user._id, "当前登录用户")
+    //     console.log(req.article.author,"作品")
+    //     if(req.user._id.toString() !== req.article.author.toString()) {
+    //         return sendResponse(res, 403, {
+    //             res: -1,
+    //             message: "文章作者和当前登录作者不相符"
+    //         })
+    //     }
+    //     next()
+    // }
 ]
+
+
+exports.deleteArticle = exports.updateArticle;
+

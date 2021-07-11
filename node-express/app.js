@@ -49,6 +49,8 @@ const createArticle = require("./api/routes/public/article/createArticle")
 const getArticle = require("./api/routes/public/article/getArticle")
 const getArticlesList  = require("./api/routes/public/article/getArticlesList")
 const updateArticle = require("./api/routes/public/article/updateArticle");
+const deleteArticle = require("./api/routes/public/article/deleteArticle");
+
 
 // todos
 const uploadFile = require("./api/routes/public/file/index");
@@ -135,6 +137,7 @@ app.use("/api/article", createArticle)
 app.use("/api/article", getArticlesList)
 app.use("/api/article", updateArticle)
 app.use("/api/article", getArticle)
+app.use("/api/article", deleteArticle)
 
 
 
