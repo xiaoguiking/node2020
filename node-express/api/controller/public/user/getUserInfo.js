@@ -1,5 +1,5 @@
 /**
- * @api {get} api//profiles/:username 获取当前用户资料
+ * @api {get} api/profiles/:username 获取当前用户资料
  * @apiGroup Group   user
  * @apiDescription 获取当前用户资料
  *

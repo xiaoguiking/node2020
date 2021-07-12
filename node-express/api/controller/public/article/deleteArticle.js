@@ -3,7 +3,6 @@
  * @apiGroup Group   articles
  * @apiDescription   删除文章
  *
- * @apiParam {String} 
  */
 
  const common = require("../../common");

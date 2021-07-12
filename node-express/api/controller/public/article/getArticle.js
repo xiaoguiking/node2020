@@ -1,6 +1,6 @@
 /**
  * @api {get} api/articles/:articleId 获取文章
- * @apiGroup Group  api
+ * @apiGroup Group  articles
  * @apiDescription 获取文章
  *
  * @apiParam {String} articleId 文章id 

@@ -1,6 +1,6 @@
 /**
  * @api {get} api/articles/getArticlesList 获取文章列表
- * @apiGroup Group  api
+ * @apiGroup Group  articles
  * @apiDescription 获取文章
  *
  * @apiParam {String} limit  展示多少条

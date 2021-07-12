@@ -1,6 +1,6 @@
 /**
  * @api {put} api/articles/:articleId 更新文章
- * @apiGroup Group  article
+ * @apiGroup Group  articles
  * @apiDescription 更新文章
  *
  * @apiParam {String} title  标题

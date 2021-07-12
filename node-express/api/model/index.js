@@ -76,10 +76,12 @@ var bookSchema = new Schema({
     },
     status: {
         type: Number,
+        min: 0,
+        max: 4,
         require: true,
     },
 })
- 
+
 
 var articleSchema = new Schema({
     ...baseModel,

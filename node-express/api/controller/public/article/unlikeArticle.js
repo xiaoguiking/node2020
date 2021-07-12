@@ -1,6 +1,6 @@
 /**
- * @api {post} api//articles/:slug/comments 获取文章路由
- * @apiGroup Group   user
+ * @api {post} api/articles/:slug/comments 获取文章路由
+ * @apiGroup Group   articles
  * @apiDescription  关注用户
  *
  * @apiParam {String} userName  用户名
