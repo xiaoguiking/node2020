@@ -41,7 +41,8 @@ const findBook = require("./api/routes/public/book/findBook");
 const deleteBook = require("./api/routes/public/book/deleteBook");
 const updateBook = require("./api/routes/public/book/updateBook");
 const getInfoByPage = require("./api/routes/public/book/infopage");
-const getChannels = require("./api/routes/public/book/getChannels")
+const getChannels = require("./api/routes/public/book/getChannels");
+const getBookById = require("./api/routes/public/book/getBookById");
 
 
 //  articles
@@ -54,7 +55,6 @@ const deleteArticle = require("./api/routes/public/article/deleteArticle");
 
 // todos
 const uploadFile = require("./api/routes/public/file/index");
-
 
 console.log("Server running at http://localhost:3000");
 
@@ -129,6 +129,7 @@ app.use("/api/book", findBook);
 app.use("/api/book", deleteBook);
 app.use("/api/book", updateBook);
 app.use("/api/book", getInfoByPage);
+app.use("/api/book", getBookById);
 // app.use("/api/book", getChannels);
 
 

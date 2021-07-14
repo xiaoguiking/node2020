@@ -1,5 +1,5 @@
 /**
- * @api {post} api/book/add  添加
+ * @api {post} api/book/add  添加文章
  * @apiGroup Group   Book
  * @apiDescription 添加书籍信息
  *
