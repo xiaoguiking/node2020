@@ -38,7 +38,7 @@ module.exports.updateBook = async function (req, res, next) {
     await book.save();
 
     sendJsonResponse(res, 200, {
-      res: 0,
+      error: "0",
       message: "更新成功",
       list: book,
     });

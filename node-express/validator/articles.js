@@ -49,7 +49,7 @@ exports.updateArticle = [
         req.article = article;
         if(!article) {
             return sendResponse(res, 404, {
-                res: -1,
+                error: "-1",
                 message: "资源404"
             })
         }

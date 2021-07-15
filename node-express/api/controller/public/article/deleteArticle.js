@@ -15,7 +15,7 @@
      await article.remove();
 
      return common.sendJsonResponse(res, 200, {
-       res: 1,
+       error: 0,
        message: "删除成功",
      })
    } catch (err) {

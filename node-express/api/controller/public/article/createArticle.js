@@ -22,7 +22,7 @@
      await article.save()
 
      return common.sendJsonResponse(res, 200, {
-       res: 1,
+       error: "0",
        message: "提交成功",
        list: article
      })

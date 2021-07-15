@@ -48,12 +48,12 @@ module.exports.getInfoByPage = function (req, res) {
         console.log(query, "query")
         BookModel.find(query).limit(Number(pageSize)).skip(Number(page - 1) * pageSize).exec(function (err, data) {
             if (err) return  common.sendResponse(res, 500, {
-                result: -1,
+                error:" -1",
                 error_info: '服务器繁忙，请稍后重试！'
             })
             console.log(data, "===========>data")
             return common.sendJsonResponse(res, 200, {
-                result: 0,
+                error: "0",
                 message: '请求成功',
                 total: count,
                 page,

@@ -47,7 +47,7 @@ module.exports.getArticlesList = async function (req, res) {
     console.log()
     const articlesCount = await ArticlesModel.countDocuments();
     common.sendJsonResponse(res, 200, {
-      res: 0,
+      error: "0",
       message: "查询成功",
       list: articles,
       articlesCount

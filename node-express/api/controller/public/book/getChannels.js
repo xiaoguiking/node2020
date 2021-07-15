@@ -18,13 +18,13 @@
         }
         if (data.length > 0) {
            common.sendResponse(res, 200, {
-               error: "1",
+               error: "0",
                message: "查询成功",
                list: data
            })
         } else {
            common.sendResponse(res, 200, {
-               error: "1",
+               error: "-1",
                message: "暂无数据",
                list: data
            }) 

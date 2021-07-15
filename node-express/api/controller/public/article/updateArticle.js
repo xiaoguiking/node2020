@@ -25,13 +25,13 @@
 
     if (!article) {
       return common.sendResponse(res, 401, {
-        res: -1,
+        error: "-1",
         message: "修改失败"
       })
     }
 
       common.sendJsonResponse(res, 200, {
-        res: 0,
+        error: "0",
         message: "更新成功",
         list: article
       })
