@@ -9,7 +9,7 @@ const baseModel = require("./baseModel");
 // md5
 const md5 = require("../../utils/md5")
  
-var loginSchema = new Schema({
+const loginSchema = new Schema({
     ...baseModel,
     userName: {
         type: String,
@@ -48,7 +48,7 @@ var loginSchema = new Schema({
 });
 
 
-var bookSchema = new Schema({
+const bookSchema = new Schema({
     ...baseModel,
     name: {
         type: String,
@@ -83,7 +83,7 @@ var bookSchema = new Schema({
 })
 
 
-var articleSchema = new Schema({
+const articleSchema = new Schema({
     ...baseModel,
      title:  {
          type: String,
@@ -116,10 +116,24 @@ var articleSchema = new Schema({
 
 })
 
+const imageSchema = new Schema({
+    ...baseModel,
+    isCollected: {
+        type: Boolean,
+    },
+    url: {
+        type:String,
+        required: true
+    },
+
+})
+
+
 // model 参数和 mongodb数据库中的collections相关联，注意数据库中命名需要加入s -------- users 
 const User = model('User', loginSchema)
 const BookModel = model('books', bookSchema)
 const ArticlesModel = model('articles', articleSchema)
+const imageModel = model('images', imageSchema)
 
 
 
@@ -128,5 +142,6 @@ const ArticlesModel = model('articles', articleSchema)
 module.exports = {
     User,
     BookModel,
-    ArticlesModel
+    ArticlesModel,
+    imageModel
 }

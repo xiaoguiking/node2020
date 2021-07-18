@@ -39,14 +39,17 @@ var upload = multer({ storage: storage })
  * @apiParam {String} avatar     
  */
 
+const filePath = `localhost:3000/my-uploads/`;
 router.post('/profile', upload.single('avatar'), function (req, res, next) {
   // req.file 是 `avatar` 文件的信息
   // req.body 将具有文本域数据，如果存在的话
   console.log(req.file)
+  const {path, filename} = req.file;
   res.send({
     result: 1,
     message: "提交成功",
-    file: req.file.path
+    file: path,
+    filePath: filePath + filename
   })
 })
 

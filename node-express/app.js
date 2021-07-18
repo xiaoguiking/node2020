@@ -43,6 +43,8 @@ const updateBook = require("./api/routes/public/book/updateBook");
 const getInfoByPage = require("./api/routes/public/book/infopage");
 const getChannels = require("./api/routes/public/book/getChannels");
 const getBookById = require("./api/routes/public/book/getBookById");
+// 获取图片素材
+const getImages = require("./api/routes/public/book/getImages")
 
 
 //  articles
@@ -129,6 +131,7 @@ app.use("/api/book", findBook);
 app.use("/api/book", deleteBook);
 app.use("/api/book", updateBook);
 app.use("/api/book", getInfoByPage);
+app.use("/api/book", getImages);
 app.use("/api/book", getBookById);
 // app.use("/api/book", getChannels);
 
