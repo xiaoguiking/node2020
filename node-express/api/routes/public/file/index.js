@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require("path")
+var {sendJsonResponse} =require("../../../controller/common")
 // var {multer} = require("./multer");
 var multer = require("multer");
 
@@ -45,8 +46,8 @@ router.post('/profile', upload.single('avatar'), function (req, res, next) {
   // req.body 将具有文本域数据，如果存在的话
   console.log(req.file)
   const {path, filename} = req.file;
-  res.send({
-    result: 1,
+  sendJsonResponse(res, 200, {
+    error: 1,
     message: "提交成功",
     file: path,
     filePath: filePath + filename
