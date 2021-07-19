@@ -15,7 +15,7 @@ module.exports.getImages = function (req, res) {
     let page = req.query.page || 1;  // 第几页
     let pageSize = req.query.pageSize || 15;
     let isCollected = req.query.isCollected;
-    console.log(req.query)
+
     let query = {};
 
     if (isCollected) {
@@ -23,6 +23,10 @@ module.exports.getImages = function (req, res) {
             isCollected
         }
     }
+    
+    if (isCollected == "false") {
+        query= {};
+    }   
 
     imageModel.find({}, function (err, data) {
         if (err) return common.sendResponse(res, 500, {
