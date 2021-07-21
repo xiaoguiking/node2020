@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var path = require("path")
 var {sendJsonResponse} =require("../../../controller/common")
-// var {multer} = require("./multer");
+
 var multer = require("multer");
 
 // localhost:3000/file/profile
@@ -11,6 +11,7 @@ var multer = require("multer");
 // 根据当前文件目录指定文件夹
 const dir = path.resolve(__dirname, '../../../../public/my-uploads/');
 // console.log(dir, "dir")
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, dir)
