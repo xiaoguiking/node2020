@@ -13,7 +13,7 @@ const { imageModel } = require("../../../model/index")
 
 module.exports.getImages = function (req, res) {
     let page = req.query.page || 1;  // 第几页
-    let pageSize = req.query.pageSize || 15;
+    let pageSize = req.query.pageSize || 18;
     let isCollected = req.query.isCollected;
 
     let query = {};

@@ -2,9 +2,10 @@
 var express = require('express');
 var router = express.Router();
 var path = require("path")
-var {sendJsonResponse} =require("../../../controller/common")
-
 var multer = require("multer");
+var {sendJsonResponse} =require("../../../controller/common")
+const { imageModel } = require("../../../model/index");
+
 
 // localhost:3000/file/profile
 
@@ -25,7 +26,8 @@ var storage = multer.diskStorage({
     let basename = path.basename(file.originalname, extname);
     // console.log(extname, basename, "==================>")
     // cb(null, basename  + extname)
-    cb(null, basename+'-'+Date.now() + extname)
+    // cb(null, basename+'-'+Date.now() + extname)
+    cb(null, basename + extname)
     // cb(null, Date.now() + extname)
     // cb(null, 'aa.jpg')
   }
@@ -41,17 +43,27 @@ var upload = multer({ storage: storage })
  * @apiParam {String} avatar     
  */
 
-const filePath = `localhost:3000/my-uploads/`;
-router.post('/profile', upload.single('avatar'), function (req, res, next) {
+const filePath = `http://localhost:3000/my-uploads/`;
+router.post('/profile', upload.single('avatar'), async function (req, res, next) {
   // req.file 是 `avatar` 文件的信息
   // req.body 将具有文本域数据，如果存在的话
   console.log(req.file)
   const {path, filename} = req.file;
-  sendJsonResponse(res, 200, {
+  const fileUrl = filePath + filename;
+  if (filename) {
+    const image =  imageModel({
+      url: fileUrl
+    })
+    image.url = fileUrl;
+    image.isCollected = "false"
+    console.log(image, "========>image")
+    await image.save();
+  }
+  return sendJsonResponse(res, 200, {
     error: 1,
     message: "提交成功",
     file: path,
-    filePath: filePath + filename
+    filePath: fileUrl
   })
 })
 
