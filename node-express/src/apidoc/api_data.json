@@ -1,6 +1,30 @@
 [
   {
     "type": "get",
+    "url": "api/book/:bookId",
+    "title": "查询_id获取数据",
+    "group": "Group_Book",
+    "description": "<p>通过_id查询书籍信息</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>_id</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/controller/public/book/getBookById.js",
+    "groupTitle": "Group_Book",
+    "name": "GetApiBookBookid"
+  },
+  {
+    "type": "get",
     "url": "api/book/getChannels",
     "title": "获取文章频道/类型",
     "group": "Group_Book",
@@ -26,7 +50,7 @@
   {
     "type": "post",
     "url": "api/book/add",
-    "title": "添加",
+    "title": "添加文章",
     "group": "Group_Book",
     "description": "<p>添加书籍信息</p>",
     "parameter": {
@@ -665,6 +689,92 @@
     "filename": "api/controller/public/article/updateArticle.js",
     "groupTitle": "Group_articles",
     "name": "PutApiArticlesArticleid"
+  },
+  {
+    "type": "delete",
+    "url": "api/image/:imageId",
+    "title": "删除指定素材图片",
+    "group": "Group_images",
+    "description": "<p>删除指定素材图片</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isCollected",
+            "description": "<p>是否收藏(是: true 否false)</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/controller/public/image/deleteImage.js",
+    "groupTitle": "Group_images",
+    "name": "DeleteApiImageImageid"
+  },
+  {
+    "type": "get",
+    "url": "api/image/collectImage",
+    "title": "收藏图片",
+    "group": "Group_images",
+    "description": "<p>收藏图片</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isCollected",
+            "description": "<p>是否收藏(是: true 否false)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>指定id值</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/controller/public/image/collectImage.js",
+    "groupTitle": "Group_images",
+    "name": "GetApiImageCollectimage"
+  },
+  {
+    "type": "get",
+    "url": "api/image/getImages",
+    "title": "查询分页获取图片素材",
+    "group": "Group_images",
+    "description": "<p>分页获取图片素材</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page",
+            "description": "<p>多少页</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>每页展示多少条</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/controller/public/image/getImages.js",
+    "groupTitle": "Group_images",
+    "name": "GetApiImageGetimages"
   },
   {
     "type": "delete",

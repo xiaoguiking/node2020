@@ -39,7 +39,7 @@ module.exports.login = async function (req, res) {
       delete user.password
       if (userName && email) {
         let data = {
-          err: 0,
+          code: 0,
           msg: "登录成功",
           user: {
             ...user,
@@ -49,7 +49,7 @@ module.exports.login = async function (req, res) {
         common.sendResponse(res, 200, data)
       } else {
         let data = {
-          err: -1,
+          code: -1,
           msg: "参数问题"
         }
         common.sendResponse(res, 200, data)

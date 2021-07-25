@@ -34,7 +34,7 @@ module.exports.addBook = function (req, res) {
             common.sendJsonResponse(res, 500, err);
         }
         common.sendResponse(res, 200, {
-            error: "0",
+            code: "0",
             message: "添加成功",
             data
         })

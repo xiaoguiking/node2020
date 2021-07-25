@@ -14,11 +14,11 @@
         console.log(req.params.bookId, "==========>query")
         const book = await BookModel.findById(req.params.bookId)
         sendJsonResponse(res, 200, {
-            error: "0",
+            code: "0",
             message: "查询成功",
             book,
         })
-    } catch (error) {
-        next(error)
+    } catch (err) {
+        next(err)
     }
 }

@@ -1,6 +1,6 @@
 /**
- * @api {get} api/book/getImages 查询分页获取图片素材
- * @apiGroup Group   Book
+ * @api {get} api/image/getImages 查询分页获取图片素材
+ * @apiGroup Group   images
  * @apiDescription   分页获取图片素材
  *
  * @apiParam {String} page          多少页
@@ -30,7 +30,7 @@ module.exports.getImages = function (req, res) {
 
     imageModel.find({}, function (err, data) {
         if (err) return common.sendResponse(res, 500, {
-            result: 1,
+            code: 1,
             error_info: '请求失败！'
         })
 
@@ -39,12 +39,12 @@ module.exports.getImages = function (req, res) {
         console.log(query, "query")
         imageModel.find(query).limit(Number(pageSize)).skip(Number(page - 1) * pageSize).exec(function (err, data) {
             if (err) return  common.sendResponse(res, 500, {
-                error:" -1",
+                code:" -1",
                 error_info: '服务器繁忙，请稍后重试！'
             })
             console.log(data, "===========>data")
             return common.sendJsonResponse(res, 200, {
-                error: "0",
+                code: "0",
                 message: '请求成功',
                 total: count,
                 page,

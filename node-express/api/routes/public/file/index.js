@@ -27,8 +27,8 @@ var storage = multer.diskStorage({
     // console.log(extname, basename, "==================>")
     // cb(null, basename  + extname)
     // cb(null, basename+'-'+Date.now() + extname)
-    cb(null, basename + extname)
-    // cb(null, Date.now() + extname)
+    // cb(null, basename + extname)
+    cb(null, Date.now() + extname)
     // cb(null, 'aa.jpg')
   }
 })
@@ -50,13 +50,16 @@ router.post('/profile', upload.single('avatar'), async function (req, res, next)
   console.log(req.file)
   const {path, filename} = req.file;
   const fileUrl = filePath + filename;
+
   if (filename) {
     const image =  imageModel({
       url: fileUrl
     })
+
     image.url = fileUrl;
     image.isCollected = "false"
     console.log(image, "========>image")
+
     await image.save();
   }
   return sendJsonResponse(res, 200, {

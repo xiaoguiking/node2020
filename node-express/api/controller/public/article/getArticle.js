@@ -22,13 +22,13 @@
 
     if (!article) {
       return common.sendResponse(res, 401, {
-        error: "-1",
+        code: "-1",
         message: "查询不到数据"
       })
     }
 
       common.sendJsonResponse(res, 200, {
-        error: "0",
+        code: "0",
         message: "查询成功",
         list: article
       })

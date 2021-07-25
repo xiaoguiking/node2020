@@ -18,13 +18,13 @@
     BookModel.deleteMany({_id}, function (err, data) {
          if (_id.length > 0) {
             common.sendResponse(res, 200, {
-                error: "0",
+                code: "0",
                 message: "del ok",
                 list: data
             })
          } else {
             common.sendResponse(res, 200, {
-                error: "-1",
+                code: "-1",
                 message: "del fail",
             }) 
          }
