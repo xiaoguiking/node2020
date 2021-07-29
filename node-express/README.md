@@ -215,19 +215,20 @@ app.use("/api", router);
 - cors
 
 ## JWT 用户身份信息验证 39 - 43
+
 ### 跨域认证问题(流程)
 
 - 1.用户向服务器发送用户名和密码。
-- 2.服务器通过验证后, 在当前通话session里面保存相关的数据,比如用户角色、登录时间。
-- 3.服务器向用户返回一个session_id, 写入用户的cookie
-- 4.用户随后的每一次请求,都会通过cookie,将session_id 传回服务器
-- 5.服务器收到session_id, 找到前期保存的数据，由此得知用户的身份。
+- 2.服务器通过验证后, 在当前通话 session 里面保存相关的数据,比如用户角色、登录时间。
+- 3.服务器向用户返回一个 session_id, 写入用户的 cookie
+- 4.用户随后的每一次请求,都会通过 cookie,将 session_id 传回服务器
+- 5.服务器收到 session_id, 找到前期保存的数据，由此得知用户的身份。
 
-> 以上模式问题: 扩展性不行，单机没有，集群的条件下需要共享session 数据。
+> 以上模式问题: 扩展性不行，单机没有，集群的条件下需要共享 session 数据。
 
 ### JWT 原理 (JSON web token)
 
-1. 服务器认证后生成一个json对象, 发送给用户。
+1. 服务器认证后生成一个 json 对象, 发送给用户。
 
 ```javascript
 {
@@ -235,16 +236,16 @@ app.use("/api", router);
   "角色": "管理员"
 }
 ```
-2.用户与服务端通信的时候,都要返回这个json对象,服务器完全只靠这个对象认证用户身份。
+
+2.用户与服务端通信的时候,都要返回这个 json 对象,服务器完全只靠这个对象认证用户身份。
 为防止用户篡改数据，服务端生成对象的时候，加加入签名。
 
-3.JWT的三部分组成
+3.JWT 的三部分组成
 
 ```markdown
 - Header 头部
-- payload  负载
+- payload 负载
 - Signature 签名
-
 
 Header.payload.Signature
 ```
@@ -252,15 +253,13 @@ Header.payload.Signature
 4.详细组成 --- 网站 https://jwt.io/
 
 ```markdown
-
 Header
 
-Header部分是一个JSON对象元数据
+Header 部分是一个 JSON 对象元数据
 {
-  "alg":"HS256",    // 签名算法
-  "typ" "JWT"       //  token 令牌类型
+"alg":"HS256", // 签名算法
+"typ" "JWT" // token 令牌类型
 }
-
 
 payload
 
@@ -272,26 +271,23 @@ payload
 - iat 签发时间
 - jti 编号
 
-
 Signature 对前两部分数据的签名，防止被篡改。
 
-*****在jwt中,消息体是透明的,使用签名可以保证数据不被篡改，但不能实现数据的加密功能 *****
+**\***在 jwt 中,消息体是透明的,使用签名可以保证数据不被篡改，但不能实现数据的加密功能 **\***
 ```
-
 
 ### JWT 使用方式
 
-> 客户端收到服务端的jwt,可以存储在cookie 或者localstorage中
+> 客户端收到服务端的 jwt,可以存储在 cookie 或者 localstorage 中
 
-> 每次通信，客户端发送请求到服务器需要带上jwt.
+> 每次通信，客户端发送请求到服务器需要带上 jwt.
 
-- 1.可以放在cookie里面，无法跨域
-- 2. 跨域放在HTTP请求头里面 
+- 1.可以放在 cookie 里面，无法跨域
+- 2. 跨域放在 HTTP 请求头里面
   ```
   Authorization: Bearer <token>
   ```
-- 3.跨域时候,放在jwt的post请求体里面
-
+- 3.跨域时候,放在 jwt 的 post 请求体里面
 
 > 时间记录查询
 
@@ -304,7 +300,7 @@ db.getCollection('base_user_info').find({"create_time":{"$gte":ISODate("2018-03-
 static async list(ctx) {
     const date_in = ctx.request.body.datein;        //入住时间  2019-7-3
     const date_out = ctx.request.body.dateout;      //离店时间  2019-7-4
-    
+
     const orders = await OrderModel.find({
         datein: {
             '$gte': date_in                 // $gte 大于等于
@@ -319,14 +315,13 @@ static async list(ctx) {
 }
 ```
 
-
 ## 项目登录记录
 
 ```
 admin  admin  token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGQ4MjQ1ZTAxYzQzNDY0ZTNmYjEyMDciLCJpYXQiOjE2MjUzNjY0NDZ9.KoDrH1HRbPhFGHfANHL_SVGN8NNh0aKRaGvFxbDHBO8   60d8245e01c43464e3fb1207
 
 风凌天下 fengling  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGVhMzhiOGFkNDU5NzkxNjQ0NGQ4YzciLCJpYXQiOjE2MjU5NjI5NjUsImV4cCI6MTYyNjA0OTM2NX0.5F7pgDNMmN6WZd5Q7CnegNQeSpEi-04ke4xduRzFlFI    60ea38b8ad4597916444d8c7
- 
+
 
 
 {

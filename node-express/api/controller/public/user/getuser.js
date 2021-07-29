@@ -11,7 +11,6 @@ const mongoose = require("mongoose");
 const common = require("../../common");
 
 const { User } = require("../../../model/index");
-const { nextTick } = require("process");
 
 module.exports.getUser =  function (req, res) {
   console.log(req.headers, "请求头")
@@ -21,6 +20,6 @@ module.exports.getUser =  function (req, res) {
       user: req.user
     })
   } catch (err) {
-    nextTick(err);
+    next(err);
   }
 };

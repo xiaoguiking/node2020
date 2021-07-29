@@ -1,5 +1,5 @@
 /**
- * @api {get} api/users/login  用户登录
+ * @api {get} api/user/login  用户登录
  * @apiGroup Group   user
  * @apiDescription 用户登录信息
  *
@@ -39,7 +39,7 @@ module.exports.login = async function (req, res) {
       delete user.password
       if (userName && email) {
         let data = {
-          code: 0,
+          code: "0",
           msg: "登录成功",
           user: {
             ...user,
@@ -49,13 +49,13 @@ module.exports.login = async function (req, res) {
         common.sendResponse(res, 200, data)
       } else {
         let data = {
-          code: -1,
+          code: "-1",
           msg: "参数问题"
         }
         common.sendResponse(res, 200, data)
       }
     })
   } catch (error) {
-    // next(error)
+    next(error)
   }
 };

@@ -19,7 +19,7 @@ api.use((req, res, next) => {
 
 // 登录接口  http://localhost:3000/api/user/login?username=amdin&pwd=123
 
-api.get("/user/login", (req, res) => {
+api.get("/user/login/test", (req, res) => {
     console.log("ok", req.query)
     const { username, pwd } = req.query;
 

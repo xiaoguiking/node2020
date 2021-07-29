@@ -11,14 +11,13 @@
  const common = require("../../common");
  
  const { User } = require("../../../model/index");
- const { nextTick } = require("process");
  
  module.exports.getUserInfo =  function (req, res) {
    //  const {userName, password} = req.query;
    try {
      res.send("获取当前用户资料");
    } catch (err) {
-     nextTick(err);
+     next(err);
    }
  };
  
