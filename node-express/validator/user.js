@@ -68,7 +68,6 @@ exports.login = [
     validate([
         query('password')
             .custom(async (password, { req }) => {
-                console.log(req.user, "11")
                 console.log(md5(password), "用户")
                 // console.log(req.user.password, "数据库")
                 if (md5(password) !== req.user.password) {

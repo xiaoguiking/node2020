@@ -10,13 +10,16 @@ module.exports = async (req, res, next) => {
     // 无效 ---- 响应401状态码
     // 有效  读取headers 数据挂载到req的请求对象上
     // 继续向后执行
-    let token = req.headers["authorization"];
+    // let token = req.headers["authorization"];
+    let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGQ4MjQ1ZTAxYzQzNDY0ZTNmYjEyMDciLCJpYXQiOjE2Mjc3Mzk1OTMsImV4cCI6MTYyNzgyNTk5M30.hc_PV1MSwaYSGBXnkExVcAcJXFSESU3PV3ana6O3PKs";
     console.log(token, "token")
     token = token ? token.split("Bearer ")[1] : null;
+    
+    console.log(token, "token")
 
     if(!token) {
        return  common.sendResponse(res, 401, {
-            result: 401,
+            result: "401",
             message: "401无token"
         })
     }
@@ -28,8 +31,8 @@ module.exports = async (req, res, next) => {
         next();
     } catch (error) {
         return  common.sendResponse(res, 401, {
-            result: 401,
-            message: "401无token"
+            result: "401",
+            message: "401无token error"
         })
     }
     
