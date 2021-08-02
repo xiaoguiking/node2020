@@ -9,7 +9,6 @@ const dayjs = require('dayjs')
 const cors = require("cors")
 const errorHandler = require("./middleware/index");
 
-const { nextTick } = require("process");
 const app = express();
 
 // mongo 操作
@@ -56,6 +55,9 @@ const getArticle = require("./api/routes/public/article/getArticle")
 const getArticlesList  = require("./api/routes/public/article/getArticlesList")
 const updateArticle = require("./api/routes/public/article/updateArticle");
 const deleteArticle = require("./api/routes/public/article/deleteArticle");
+
+// proxy
+const getImooc = require("./api/routes/public/proxy/imooc")
 
 
 // todos
@@ -113,7 +115,7 @@ app.use("/", indexRouter);
 // app.use('/users', usersRouter);
 // app.use('/login', loginRouter)
 // app.use('/reg', regRouter)
-// // api
+
 app.use('/api', api)
 // app.use("/food", food)
 
@@ -154,6 +156,9 @@ app.use("/api/article", deleteArticle)
 
 
 app.use("/file", uploadFile);
+
+// proxy
+app.use("/api/proxy", getImooc)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
