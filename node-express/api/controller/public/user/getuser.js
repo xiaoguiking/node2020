@@ -1,5 +1,5 @@
 /**
- * @api {get} api/user  获取当前用户登录信息
+ * @api {get} api/getUser  获取当前用户登录信息
  * @apiGroup Group   user
  * @apiDescription 获取当前用户登录信息
  *

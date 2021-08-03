@@ -11,11 +11,11 @@ module.exports = async (req, res, next) => {
     // 有效  读取headers 数据挂载到req的请求对象上
     // 继续向后执行
     // let token = req.headers["authorization"];
-    let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGQ4MjQ1ZTAxYzQzNDY0ZTNmYjEyMDciLCJpYXQiOjE2Mjc3Mzk1OTMsImV4cCI6MTYyNzgyNTk5M30.hc_PV1MSwaYSGBXnkExVcAcJXFSESU3PV3ana6O3PKs";
-    console.log(token, "token")
+    let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGQ4MjQ1ZTAxYzQzNDY0ZTNmYjEyMDciLCJpYXQiOjE2MjUzNjY0NDZ9.KoDrH1HRbPhFGHfANHL_SVGN8NNh0aKRaGvFxbDHBO8";
     token = token ? token.split("Bearer ")[1] : null;
+    console.log(token, "token检查")
     
-    console.log(token, "token")
+    // console.log(token, "token")
 
     if(!token) {
        return  common.sendResponse(res, 401, {
@@ -25,6 +25,7 @@ module.exports = async (req, res, next) => {
     }
 
     try {
+        console.log(11)
         const decodeToken = await verify(token, jwtSecret);
         console.log(decodeToken, "decodeToken")
         req.user = await User.findById(decodeToken.userId)
