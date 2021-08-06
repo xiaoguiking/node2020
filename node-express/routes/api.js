@@ -3,8 +3,9 @@
  *  get  req.query
  *  post  第三方插件 body-parser 数据格式： json  x-www-form  formdata
  */
-var express = require('express');
-var api = express.Router();
+const express = require('express');
+const { sendJsonResponse } = require("../api/controller/common")
+const api = express.Router();
 
 
 api.use((req, res, next) => {
@@ -106,5 +107,48 @@ api.get('/user/book/list', function (req, res, next) {
         }
     })
 });
+
+
+// 大量数据接口
+api.get("/list/many",  function (req, res, next) {
+    // let result = [
+    //     {
+    //         title: "三国演义",
+    //         type: "古代历史",
+    //         person: "林冲、孙二娘、时迁"
+    //     },
+    //     {
+    //         title: "水浒笑传",
+    //         type: "古代历史",
+    //         person: "林冲、孙二娘、时迁"
+    //     },
+    //     {
+    //         title: "西游记",
+    //         type: "古代历史",
+    //         person: "林冲、孙二娘、时迁"
+    //     }
+    // ]
+
+    let arrayLike = {
+    '0': 'a',
+    '1': 'b',
+    '2': 'c',
+    length: 3
+    };
+
+    const  arr1 = [].slice.call(arrayLike); // ['a', 'b', 'c']
+    const arr2 = Array.from(arrayLike).concat(arr1)
+    const arr3 = Array.of(1,2,3,4,5,6,7,8,9, 10)
+    console.log(arr2, "arr2")
+    const arr = [...arr1, ...arr2, ...arr3 ]
+    return sendJsonResponse(res, 200, {
+        code: "0",
+        message: "数据请求成功",
+        arr
+    })
+})
+
+
+//
 
 module.exports = api;
