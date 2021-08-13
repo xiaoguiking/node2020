@@ -5,23 +5,26 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
-const dayjs = require('dayjs')
-const cors = require("cors")
+const dayjs = require("dayjs");
+const cors = require("cors");
 const errorHandler = require("./middleware/index");
 
 const app = express();
 
 // mongo 操作
-require("./api/model/db"); 
+require("./api/model/db");
 
+// user 路由
 const login = require("./api/routes/public/user/login");
-const reg = require("./api/routes/public/user/reg");
-const put = require("./api/routes/public/user/updateuser");
-
-const getUser = require("./api/routes/public/user/getuser")
-const getUserInfo = require("./api/routes/public/user/getUserInfo")
-const unfollowUser = require("./api/routes/public/user/unfollowUser")
-const focusUser = require("./api/routes/public/user/focusUser")
+const {  
+  login,
+  reg,
+  put,
+  getUser,
+  getUserInfo,
+  unfollowUser,
+  focusUser,
+}  = require("./api/routes/public/user/index")
 
 // 路由配置
 const indexRouter = require("./routes/index");
@@ -31,42 +34,43 @@ const regRouter = require("./routes/reg");
 const api = require("./routes/api");
 const food = require("./routes/food");
 
-const todos = require("./api/routes/public/todos/index")
-
-
-// book接口api
-const addBook = require("./api/routes/public/book/addBook");
-const findBook = require("./api/routes/public/book/findBook");
-const deleteBook = require("./api/routes/public/book/deleteBook");
-const updateBook = require("./api/routes/public/book/updateBook");
-const getInfoByPage = require("./api/routes/public/book/infopage");
-const getChannels = require("./api/routes/public/book/getChannels");
-const getBookById = require("./api/routes/public/book/getBookById");
+const todos = require("./api/routes/public/todos/index");
 
 // 获取图片素材
-const getImages = require("./api/routes/public/image/getImages")
-const deleteImage = require("./api/routes/public/image/deleteImage")
-const collectImage = require("./api/routes/public/image/collectImage")
+const getImages = require("./api/routes/public/image/getImages");
+const deleteImage = require("./api/routes/public/image/deleteImage");
+const collectImage = require("./api/routes/public/image/collectImage");
 
+// book接口api
+const {
+  addBook,
+  getBookById,
+  findBook,
+  deleteBook,
+  updateBook,
+  getInfoByPage,
+  getChannels,
+  getBookById,
+} = require("./api/routes/public/book/index");
 
 //  articles
-const createArticle = require("./api/routes/public/article/createArticle")
-const getArticle = require("./api/routes/public/article/getArticle")
-const getArticlesList  = require("./api/routes/public/article/getArticlesList")
-const updateArticle = require("./api/routes/public/article/updateArticle");
-const deleteArticle = require("./api/routes/public/article/deleteArticle");
+const {
+  createArticle,
+  getArticle,
+  getArticlesList,
+  updateArticle,
+  deleteArticle,
+} = require("./api/routes/public/article/index");
 
 // proxy
-const getImooc = require("./api/routes/public/proxy/imooc")
-
+const getImooc = require("./api/routes/public/proxy/imooc");
 
 // todos
 const uploadFile = require("./api/routes/public/file/index");
 
 console.log("Server running at http://localhost:3000");
 
-// render the error page
-// view engine setup
+
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 app.engine("html", ejs.__express);
@@ -93,10 +97,12 @@ app.use(express.static(path.join(__dirname, "public")));
  * 放置顺序重要
  */
 app.use(function (req, res, next) {
-  // console.log(req.url, "============>请求地址")
-  // console.log(req.method, "==============请求方法")
-  // console.log(req.headers, "==============请求头")
-  console.log("请求日志", req.url, req.method, dayjs(new Date()).format('YYYY-MM-DD--HH:mm:ss'))
+  console.log(
+    "请求日志",
+    req.url,
+    req.method,
+    dayjs(new Date()).format("YYYY-MM-DD--HH:mm:ss")
+  );
   console.log("访问如何页面，此函数都会被调用");
   // let { token } = req.query;
   // console.log(token, "==========>token")
@@ -106,7 +112,7 @@ app.use(function (req, res, next) {
   //   res.send("缺少token")
   // }
 
-  // 交出执行权，然后继续匹配执行。 
+  // 交出执行权，然后继续匹配执行。
   next();
 });
 
@@ -116,21 +122,20 @@ app.use("/", indexRouter);
 // app.use('/login', loginRouter)
 // app.use('/reg', regRouter)
 
-app.use('/api', api)
+app.use("/api", api);
 // app.use("/food", food)
-
 
 // localhost:3000/api/login?username=admin
 app.use("/api", login);
 app.use("/api", reg);
 app.use("/api", put);
-app.use("/api", getUser)
+app.use("/api", getUser);
 
-app.use("/api", getUserInfo)
-app.use("/api", focusUser)
-app.use("/api", unfollowUser)
+app.use("/api", getUserInfo);
+app.use("/api", focusUser);
+app.use("/api", unfollowUser);
 
-app.use("/api", todos)
+app.use("/api", todos);
 
 // book
 app.use("/api/book", addBook);
@@ -145,29 +150,27 @@ app.use("/api/book", getBookById);
 // image
 app.use("/api/image", getImages);
 app.use("/api/image", collectImage);
-app.use("/api/image",  deleteImage);
+app.use("/api/image", deleteImage);
 
 // articles
-app.use("/api/article", createArticle)
-app.use("/api/article", getArticlesList)
-app.use("/api/article", updateArticle)
-app.use("/api/article", getArticle)
-app.use("/api/article", deleteArticle)
-
+app.use("/api/article", createArticle);
+app.use("/api/article", getArticlesList);
+app.use("/api/article", updateArticle);
+app.use("/api/article", getArticle);
+app.use("/api/article", deleteArticle);
 
 app.use("/file", uploadFile);
 
 // proxy
-app.use("/api/proxy", getImooc)
+app.use("/api/proxy", getImooc);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-
 // error handler 错误处理中间件
-app.use(errorHandler())
+app.use(errorHandler());
 // error handler 错误处理中间件
 // app.use(function (err, req, res, next) {
 //   // set locals, only providing error in development
