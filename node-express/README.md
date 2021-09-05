@@ -363,3 +363,11 @@ admin  admin  token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGQ4M
     }
 }
 ```
+
+
+## mongoDB 基本语法
+
+- 插入文档
+- 删除文档
+- 更新文档
+- 查找文档

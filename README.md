@@ -6,11 +6,12 @@ express
 
 Commonjs 自定义模块的使用
 
+```
 通过 exports 或者 module.exports 暴露属性或者方法
 在需要使用的文件中通过 require 的方式引入这个模块
-
 https://www.bilibili.com/video/BV11t411k79h?p=29
 
+```
 
 
 ## Git 贡献提交规范
@@ -38,7 +39,7 @@ https://www.bilibili.com/video/BV11t411k79h?p=29
 - node-eg  案例文件
 - node-express   vue-imis-api
 - node-update 测试文件夹
-- node1 
+- node1
 - node2
 
 

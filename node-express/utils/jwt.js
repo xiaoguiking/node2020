@@ -1,7 +1,7 @@
 // jwt token
 
 const jwt = require("jsonwebtoken");
-// 封装promise 
+// 封装promise
 const { promisify } = require("util")
 
 
