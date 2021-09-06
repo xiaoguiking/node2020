@@ -15,7 +15,6 @@ const app = express();
 require("./api/model/db");
 
 // user 路由
-const login = require("./api/routes/public/user/login");
 const {  
   login,
   reg,
@@ -44,7 +43,6 @@ const collectImage = require("./api/routes/public/image/collectImage");
 // book接口api
 const {
   addBook,
-  getBookById,
   findBook,
   deleteBook,
   updateBook,

@@ -44,6 +44,7 @@ var upload = multer({ storage: storage })
  */
 
 const filePath = `http://localhost:3000/my-uploads/`;
+
 router.post('/profile', upload.single('avatar'), async function (req, res, next) {
   // req.file 是 `avatar` 文件的信息
   // req.body 将具有文本域数据，如果存在的话
