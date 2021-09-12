@@ -23,6 +23,8 @@ const {
   getUserInfo,
   unfollowUser,
   focusUser,
+  getUsers,
+  insertUsers
 }  = require("./api/routes/public/user/index")
 
 // 路由配置
@@ -65,6 +67,8 @@ const getImooc = require("./api/routes/public/proxy/imooc");
 
 // todos
 const uploadFile = require("./api/routes/public/file/index");
+
+// 上传excel
 
 console.log("Server running at http://localhost:3000");
 
@@ -123,6 +127,7 @@ app.use("/", indexRouter);
 app.use("/api", api);
 // app.use("/food", food)
 
+//  user 用户
 // localhost:3000/api/login?username=admin
 app.use("/api", login);
 app.use("/api", reg);
@@ -132,6 +137,8 @@ app.use("/api", getUser);
 app.use("/api", getUserInfo);
 app.use("/api", focusUser);
 app.use("/api", unfollowUser);
+app.use("/api", getUsers)
+app.use("/api", insertUsers)
 
 app.use("/api", todos);
 

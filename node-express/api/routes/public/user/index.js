@@ -6,6 +6,8 @@ const getUser = require("./getuser");
 const getUserInfo = require("./getUserInfo");
 const unfollowUser = require("./unfollowUser");
 const focusUser = require("./focusUser");
+const getUsers = require("./getUsers");
+const insertUsers = require("./insertUsers");
 
 module.exports = {
   login,
@@ -15,4 +17,6 @@ module.exports = {
   getUserInfo,
   unfollowUser,
   focusUser,
+  getUsers,
+  insertUsers
 };

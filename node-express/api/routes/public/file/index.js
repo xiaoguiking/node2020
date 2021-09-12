@@ -3,7 +3,13 @@ var express = require('express');
 var router = express.Router();
 var path = require("path")
 var multer = require("multer");
-var {sendJsonResponse} =require("../../../controller/common")
+const fs = require("fs")
+const Busboy = require("busboy")
+
+const xlsx = require('node-xlsx');
+
+const uploadFileExcel = require("./utils")
+var { sendJsonResponse, sendResponse } = require("../../../controller/common")
 const { imageModel } = require("../../../model/index");
 
 
@@ -27,8 +33,8 @@ var storage = multer.diskStorage({
     // console.log(extname, basename, "==================>")
     // cb(null, basename  + extname)
     // cb(null, basename+'-'+Date.now() + extname)
-    // cb(null, basename + extname)
-    cb(null, Date.now() + extname)
+    cb(null, basename + extname)
+    // cb(null, Date.now() + extname)
     // cb(null, 'aa.jpg')
   }
 })
@@ -49,11 +55,11 @@ router.post('/profile', upload.single('avatar'), async function (req, res, next)
   // req.file 是 `avatar` 文件的信息
   // req.body 将具有文本域数据，如果存在的话
   console.log(req.file)
-  const {path, filename} = req.file;
+  const { path, filename } = req.file;
   const fileUrl = filePath + filename;
 
   if (filename) {
-    const image =  imageModel({
+    const image = imageModel({
       url: fileUrl
     })
 
@@ -91,6 +97,43 @@ router.post('/photos/upload', upload.array('photos', 12), function (req, res, ne
   })
 })
 
+
+/**
+ * @api {post} file/xlsx/upload  excel 文件上传写库
+ * @apiGroup Group   File
+ * @apiDescription   文件上传写库
+ *
+ * @apiParam {String} excel      
+ */
+router.post("/xslx/upload", function (req, res, next) {
+  try {
+
+    const pathExcel = path.join(__dirname, "../../../../public/excel");
+    let excelContent = xlsx.parse(fs.readFileSync(pathExcel + "/file.xlsx"));
+    if (excelContent) {
+      console.log(excelContent, "path")
+      let columnName = excelContent[0].data[0];
+      console.log(columnName, "columnName==========>")
+      data.forEach(list => {
+        let json = {
+          userName: "",
+          email: "",
+        }
+        console.log(list, "=======>list")
+      })
+      let data = excelContent[0].data;
+
+      console.log(data, "============>data")
+    }
+
+    sendJsonResponse(res, 200, {
+      message: "success"
+    })
+  } catch (error) {
+    console.log(error, "==============> error")
+  }
+
+})
 
 
 module.exports = router;
