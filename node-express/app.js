@@ -14,6 +14,7 @@ const app = express();
 // mongo 操作
 require("./api/admin/model/db");
 
+// TODO admin 路由
 // user 路由
 const {  
   login,
@@ -71,6 +72,13 @@ const uploadFile = require("./api/admin/routes/public/file/index");
 // 上传excel
 
 console.log("Server running at http://localhost:3000");
+
+
+
+// TODO webapp 路由
+// user
+const {loginWeb} = require("./api/webapp/routes/user")
+
 
 
 // app.set('views', path.join(__dirname, 'views'));
@@ -169,10 +177,19 @@ app.use("/file", uploadFile);
 // proxy
 app.use("/api/proxy", getImooc);
 
+
+// TODO  webapp api
+
+app.use("/api/web", loginWeb)
+
+
+
+
+
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+// app.use(function (req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler 错误处理中间件
 app.use(errorHandler());

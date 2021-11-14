@@ -44,7 +44,12 @@ const loginSchema = new Schema({
         type: String,
         default: null
     },
-    updateBy: String,
+    phone: {
+        type: String,
+    },
+    sms: {
+        type: String
+    }
 });
 
 
