@@ -3,9 +3,9 @@
 var express = require('express');
 var controller = require('../../../controller/public/article/createArticle');
 var router = express.Router();
-var {createArticle} = require("../../../../validator/articles")
+var {createArticle} = require("../../../../../validator/articles")
 // var auth = require("../../../../utils/jwt")
-var auth = require("../../../../middleware/auth")
+var auth = require("../../../../../middleware/auth")
 
 router.post('/',
   auth,

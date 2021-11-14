@@ -4,8 +4,8 @@
 const { body, param } = require('express-validator');
 const validate = require("../middleware/validator")
 const mongoose = require("mongoose")
-const { ArticlesModel } = require("../api/model/index");
-const {sendResponse} = require("../api/controller/common")
+const { ArticlesModel } = require("../api/admin/model/index");
+const {sendResponse} = require("../api/admin/controller/common")
 // const md5 = require("../utils/md5")
 
 

@@ -1,6 +1,6 @@
 const { body, query } = require('express-validator');
 const validate = require("../middleware/validator")
-const { User } = require("../api/model/index")
+const { User } = require("../api/admin/model/index")
 const md5 = require("../utils/md5")
 
 exports.reg = validate([

@@ -17,7 +17,7 @@
 const common = require("../../common");
 const { User } = require("../../../model/index")
 // jwt 封装
-const jwt = require("../../../../utils/jwt")
+const jwt = require("../../../../../utils/jwt")
 // 基础base jwt 值
 const { jwtSecret } = require("../../../config/db")
 
