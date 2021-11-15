@@ -125,7 +125,7 @@ app.use("/", indexRouter);
 // app.use('/reg', regRouter)
 
 app.use("/api", api);
-// app.use("/food", food)
+app.use("/food", food)
 
 //  user 用户
 // localhost:3000/api/login?username=admin
@@ -170,9 +170,9 @@ app.use("/file", uploadFile);
 app.use("/api/proxy", getImooc);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+// app.use(function (req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler 错误处理中间件
 app.use(errorHandler());
