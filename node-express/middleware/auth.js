@@ -1,8 +1,8 @@
 // 验证token中间件 auth
 const { verify } = require("../utils/jwt")
-const {jwtSecret} = require("../api/config/db");
-const common = require("../api/controller/common");
-const {User} = require("../api/model/index")
+const {jwtSecret} = require("../api/admin/config/db");
+const common = require("../api/admin/controller/common");
+const {User} = require("../api/admin/model/index")
 
 // Bearer
 module.exports = async (req, res, next) => {

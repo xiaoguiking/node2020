@@ -7,7 +7,7 @@ const model = mongoose.model.bind(mongoose);
 const baseModel = require("./baseModel");
 
 // md5
-const md5 = require("../../utils/md5")
+const md5 = require("../../../utils/md5")
  
 const loginSchema = new Schema({
     ...baseModel,
@@ -44,7 +44,12 @@ const loginSchema = new Schema({
         type: String,
         default: null
     },
-    updateBy: String,
+    phone: {
+        type: String,
+    },
+    sms: {
+        type: String
+    }
 });
 
 

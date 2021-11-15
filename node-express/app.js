@@ -12,8 +12,9 @@ const errorHandler = require("./middleware/index");
 const app = express();
 
 // mongo 操作
-require("./api/model/db");
+require("./api/admin/model/db");
 
+// TODO admin 路由
 // user 路由
 const {  
   login,
@@ -25,7 +26,7 @@ const {
   focusUser,
   getUsers,
   insertUsers
-}  = require("./api/routes/public/user/index")
+}  = require("./api/admin/routes/public/user/index")
 
 // 路由配置
 const indexRouter = require("./routes/index");
@@ -35,12 +36,12 @@ const regRouter = require("./routes/reg");
 const api = require("./routes/api");
 const food = require("./routes/food");
 
-const todos = require("./api/routes/public/todos/index");
+const todos = require("./api/admin/routes/public/todos/index");
 
 // 获取图片素材
-const getImages = require("./api/routes/public/image/getImages");
-const deleteImage = require("./api/routes/public/image/deleteImage");
-const collectImage = require("./api/routes/public/image/collectImage");
+const getImages = require("./api/admin/routes/public/image/getImages");
+const deleteImage = require("./api/admin/routes/public/image/deleteImage");
+const collectImage = require("./api/admin/routes/public/image/collectImage");
 
 // book接口api
 const {
@@ -51,7 +52,7 @@ const {
   getInfoByPage,
   getChannels,
   getBookById,
-} = require("./api/routes/public/book/index");
+} = require("./api/admin/routes/public/book/index");
 
 //  articles
 const {
@@ -60,17 +61,24 @@ const {
   getArticlesList,
   updateArticle,
   deleteArticle,
-} = require("./api/routes/public/article/index");
+} = require("./api/admin/routes/public/article/index");
 
 // proxy
-const getImooc = require("./api/routes/public/proxy/imooc");
+const getImooc = require("./api/admin/routes/public/proxy/imooc");
 
 // todos
-const uploadFile = require("./api/routes/public/file/index");
+const uploadFile = require("./api/admin/routes/public/file/index");
 
 // 上传excel
 
 console.log("Server running at http://localhost:3000");
+
+
+
+// TODO webapp 路由
+// user
+const {loginWeb} = require("./api/webapp/routes/user")
+
 
 
 // app.set('views', path.join(__dirname, 'views'));
@@ -169,10 +177,19 @@ app.use("/file", uploadFile);
 // proxy
 app.use("/api/proxy", getImooc);
 
+
+// TODO  webapp api
+
+app.use("/api/web", loginWeb)
+
+
+
+
+
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+// app.use(function (req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler 错误处理中间件
 app.use(errorHandler());

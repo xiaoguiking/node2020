@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "dev": "nodemon ./bin/www",
     "api": "lite-server",
     "build": "apidoc -i ./api -o ./src/apidoc "
   },

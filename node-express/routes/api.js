@@ -4,7 +4,7 @@
  *  post  第三方插件 body-parser 数据格式： json  x-www-form  formdata
  */
 const express = require('express');
-const { sendJsonResponse } = require("../api/controller/common")
+const { sendJsonResponse } = require("../api/admin/controller/common")
 const api = express.Router();
 
 
