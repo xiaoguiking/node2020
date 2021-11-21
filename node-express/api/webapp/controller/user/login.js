@@ -1,5 +1,5 @@
 /**
- * @api {get} api/webapp/user/login  用户登录
+ * @api {post} api/web/user/login  用户登录
  * @apiGroup Group   user
  * @apiDescription 用户登录信息
  *
