@@ -1,5 +1,5 @@
 /**
- * 用户登录
+ * *用户登录
  */
  const express = require('express');
  const controller = require('../../controller/user/login');

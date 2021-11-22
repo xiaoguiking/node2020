@@ -15,6 +15,7 @@ const app = express();
 require("./api/admin/model/db");
 
 // TODO admin 路由
+
 // user 路由
 const {  
   login,
@@ -77,8 +78,7 @@ console.log("Server running at http://localhost:3000");
 
 // TODO webapp 路由
 // user
-const {loginWeb} = require("./api/webapp/routes/user")
-
+const {loginWeb, smsWeb} = require("./api/webapp/routes/user")
 
 
 // app.set('views', path.join(__dirname, 'views'));
@@ -179,8 +179,8 @@ app.use("/api/proxy", getImooc);
 
 
 // TODO  webapp api
-
 app.use("/api/web", loginWeb)
+app.use("/api/web", smsWeb)
 
 
 

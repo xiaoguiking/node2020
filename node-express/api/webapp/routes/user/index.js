@@ -1,5 +1,7 @@
 const loginWeb = require("./login")
+const smsWeb = require("./sms")
 
 module.exports = {
-    loginWeb
+    loginWeb,
+    smsWeb
 }
