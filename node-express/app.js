@@ -133,7 +133,7 @@ app.use("/", indexRouter);
 // app.use('/reg', regRouter)
 
 app.use("/api", api);
-// app.use("/food", food)
+app.use("/food", food)
 
 //  user 用户
 // localhost:3000/api/login?username=admin
