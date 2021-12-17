@@ -44,7 +44,7 @@ const loginSchema = new Schema({
         type: String,
         default: null
     },
-    phone: {
+    mobile: {
         type: String,
     },
     sms: {
@@ -121,6 +121,20 @@ const articleSchema = new Schema({
 
 })
 
+// 消息通知
+const messageSchema = new Schema({
+    ...baseModel,
+    title:  {
+        type: String,
+        required: true
+    },
+    description:  {
+        type: String,
+        required: true
+    },
+
+})
+
 const imageSchema = new Schema({
     ...baseModel,
     isCollected: {
@@ -139,6 +153,7 @@ const User = model('User', loginSchema)
 const BookModel = model('books', bookSchema)
 const ArticlesModel = model('articles', articleSchema)
 const imageModel = model('images', imageSchema)
+const MessageModel = model('messages', messageSchema, 'message')
 
 
 
@@ -148,5 +163,6 @@ module.exports = {
     User,
     BookModel,
     ArticlesModel,
-    imageModel
+    imageModel,
+    MessageModel
 }
